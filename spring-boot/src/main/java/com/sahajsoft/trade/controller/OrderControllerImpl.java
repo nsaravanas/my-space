@@ -91,14 +91,7 @@ public class OrderControllerImpl implements OrderController {
 		orders.add(o4);
 		orders.add(o5);
 
-		for (Order order : orders) {
-			order.setReceivedTime(new Date());
-			placeOrder(order);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException ie) {
-				ie.printStackTrace();
-			}
-		}
+		this.service.placeOrders(orders);
+
 	}
 }

@@ -29,6 +29,11 @@ public class OrderServiceImpl implements OrderService {
 	public boolean placeOrder(Order order) {
 		boolean isSuccess = false;
 		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException ie) {
+			LOG.info("Delay added to check flow.");
+		}
+		try {
 			this.repository.save(order);
 			isSuccess = true;
 		} catch (DataAccessException dae) {
