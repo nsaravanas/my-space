@@ -43,6 +43,7 @@ public class OrderProcessingEngineImpl implements OrderProcessingEngine {
 
 	private void updateRemainingQuantityStatus(Long order_quantity, Order order, Long o_quantity, Order o) {
 
+		//delay added for debugging purpose
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException ie) {
