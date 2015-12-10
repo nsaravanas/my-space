@@ -20,28 +20,28 @@ public class OrderProcessingEngineImpl implements OrderProcessingEngine {
 	@Override
 	public void processOrder(Order order) {
 		List<Order> orders = this.repository.findOpenOrders(order.getCompany(), order.getSide(), Status.OPEN);
-		Integer order_quantity = order.getRemainingQuantity();
+		Long order_quantity = order.getRemainingQuantity();
 		for (Order o : orders) {
 			if (order_quantity > 0) {
-				Integer o_quantity = o.getRemainingQuantity();
+				Long o_quantity = o.getRemainingQuantity();
 				if (order_quantity == o_quantity) {
-					order_quantity = 0;
-					o_quantity = 0;
+					order_quantity = 0L;
+					o_quantity = 0L;
 					updateRemainingQuantityStatus(order_quantity, order, o_quantity, o);
 				} else if (order_quantity < o_quantity) {
 					o_quantity -= order_quantity;
-					order_quantity = 0;
+					order_quantity = 0L;
 					updateRemainingQuantityStatus(order_quantity, order, o_quantity, o);
 				} else {
 					order_quantity -= o_quantity;
-					o_quantity = 0;
+					o_quantity = 0L;
 					updateRemainingQuantityStatus(order_quantity, order, o_quantity, o);
 				}
 			}
 		}
 	}
 
-	private void updateRemainingQuantityStatus(Integer order_quantity, Order order, Integer o_quantity, Order o) {
+	private void updateRemainingQuantityStatus(Long order_quantity, Order order, Long o_quantity, Order o) {
 
 		try {
 			Thread.sleep(2000);

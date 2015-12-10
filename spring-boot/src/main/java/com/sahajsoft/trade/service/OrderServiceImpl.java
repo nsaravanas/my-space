@@ -59,7 +59,18 @@ public class OrderServiceImpl implements OrderService {
 		for (Order order : orders) {
 			placeOrder(order);
 		}
-		return false;
+		return true;
+	}
+
+	@Override
+	public void parseCSVInput() {
+		final String filePath = "input.csv";
+		List<Order> orders = CSVUtil.readFile(filePath);
+	}
+
+	public void outputCSVFile() {
+		final String filePath = "output.csv";
+		CSVUtil.writeFile(listOrders(), filePath);
 	}
 
 }

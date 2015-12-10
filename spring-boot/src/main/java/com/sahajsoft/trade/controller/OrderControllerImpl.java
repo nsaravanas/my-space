@@ -42,13 +42,19 @@ public class OrderControllerImpl implements OrderController {
 	public Order sampleOrder() {
 		Order o = new Order();
 		o.setCompany("ABC");
-		o.setQuantity(100);
+		o.setQuantity(100L);
 		o.setReceivedTime(new Date());
 		o.setSide(Side.BUY);
 		o.setStatus(Status.OPEN);
 		o.setStockId(123);
 		o.setUpdatedTime(new Date());
 		return o;
+	}
+
+	@Override
+	@RequestMapping("/readInput")
+	public void parseCSVInput() {
+		this.service.parseCSVInput();
 	}
 
 	@RequestMapping("/test")
@@ -58,31 +64,31 @@ public class OrderControllerImpl implements OrderController {
 		o1.setStockId(1);
 		o1.setSide(Side.BUY);
 		o1.setCompany("ABC");
-		o1.setQuantity(10);
+		o1.setQuantity(10L);
 
 		Order o2 = new Order(); // 2 Sell XYZ 15
 		o2.setStockId(2);
 		o2.setSide(Side.SELL);
 		o2.setCompany("XYZ");
-		o2.setQuantity(15);
+		o2.setQuantity(15L);
 
 		Order o3 = new Order(); // 3 Sell ABC 13
 		o3.setStockId(3);
 		o3.setSide(Side.SELL);
 		o3.setCompany("ABC");
-		o3.setQuantity(13);
+		o3.setQuantity(13L);
 
 		Order o4 = new Order(); // 4 Buy XYZ 10
 		o4.setStockId(4);
 		o4.setSide(Side.BUY);
 		o4.setCompany("XYZ");
-		o4.setQuantity(10);
+		o4.setQuantity(10L);
 
 		Order o5 = new Order(); // 5 Buy XYZ 8
 		o5.setStockId(5);
 		o5.setSide(Side.BUY);
 		o5.setCompany("XYZ");
-		o5.setQuantity(8);
+		o5.setQuantity(8L);
 
 		List<Order> orders = new ArrayList<>();
 		orders.add(o1);

@@ -10,4 +10,6 @@ public interface OrderController {
 
 	boolean placeOrder(Order order);
 
+	void parseCSVInput();
+
 }

@@ -34,7 +34,7 @@ public class Order {
 	@NotNull
 	@DecimalMin(inclusive = false, value = "0")
 	@Column(name = "QUANTITY")
-	private Integer quantity;
+	private Long quantity;
 
 	@NotNull
 	@Column(name = "STATUS")
@@ -51,20 +51,32 @@ public class Order {
 
 	@NotNull
 	@Column(name = "REMAINING_QUANTITY")
-	private Integer remainingQuantity;
+	private Long remainingQuantity;
 
 	@Version
 	private Long version = 0L;
+
+	public Order() {
+		super();
+	}
+
+	public Order(Integer stockId, Side side, String company, Long quantity) {
+		super();
+		this.stockId = stockId;
+		this.side = side;
+		this.company = company;
+		this.quantity = quantity;
+	}
 
 	public Long getVersion() {
 		return version;
 	}
 
-	public Integer getRemainingQuantity() {
+	public Long getRemainingQuantity() {
 		return remainingQuantity;
 	}
 
-	public void setRemainingQuantity(Integer remainingQuantity) {
+	public void setRemainingQuantity(Long remainingQuantity) {
 		this.remainingQuantity = remainingQuantity;
 	}
 
@@ -96,11 +108,11 @@ public class Order {
 		this.company = company;
 	}
 
-	public Integer getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 		setRemainingQuantity(quantity);
 	}
@@ -129,4 +141,9 @@ public class Order {
 		this.updatedTime = updatedTime;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [stockId=" + stockId + ", side=" + side + ", company=" + company + ", quantity=" + quantity
+				+ ", status=" + status + "]";
+	}
 }
