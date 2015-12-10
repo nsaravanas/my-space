@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.service;
+package com.sahajsoft.soes.service;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,8 +12,8 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.Logger;
 
-import com.sahajsoft.trade.model.Order;
-import com.sahajsoft.trade.model.Side;
+import com.sahajsoft.soes.model.Order;
+import com.sahajsoft.soes.model.Side;
 
 public class CSVUtil {
 

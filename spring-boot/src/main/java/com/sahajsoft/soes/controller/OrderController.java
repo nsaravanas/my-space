@@ -1,8 +1,8 @@
-package com.sahajsoft.trade.controller;
+package com.sahajsoft.soes.controller;
 
 import java.util.List;
 
-import com.sahajsoft.trade.model.Order;
+import com.sahajsoft.soes.model.Order;
 
 public interface OrderController {
 

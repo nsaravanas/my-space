@@ -1,8 +1,8 @@
-package com.sahajsoft.trade.service;
+package com.sahajsoft.soes.service;
 
 import java.util.List;
 
-import com.sahajsoft.trade.model.Order;
+import com.sahajsoft.soes.model.Order;
 
 public interface OrderService {
 

@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.model;
+package com.sahajsoft.soes.model;
 
 public enum Side {
 	BUY, SELL

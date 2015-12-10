@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.repository;
+package com.sahajsoft.soes.repository;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.sahajsoft.trade.model.Order;
-import com.sahajsoft.trade.model.Side;
-import com.sahajsoft.trade.model.Status;
+import com.sahajsoft.soes.model.Order;
+import com.sahajsoft.soes.model.Side;
+import com.sahajsoft.soes.model.Status;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {

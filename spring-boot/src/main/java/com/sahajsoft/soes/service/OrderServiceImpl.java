@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.service;
+package com.sahajsoft.soes.service;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.sahajsoft.trade.engine.OrderProcessingEngine;
-import com.sahajsoft.trade.model.Order;
-import com.sahajsoft.trade.repository.OrderRepository;
+import com.sahajsoft.soes.engine.OrderProcessingEngine;
+import com.sahajsoft.soes.model.Order;
+import com.sahajsoft.soes.repository.OrderRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {

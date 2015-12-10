@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.engine;
+package com.sahajsoft.soes.engine;
 
 import java.util.Date;
 import java.util.List;
@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.sahajsoft.trade.model.Order;
-import com.sahajsoft.trade.model.Status;
-import com.sahajsoft.trade.repository.OrderRepository;
+import com.sahajsoft.soes.model.Order;
+import com.sahajsoft.soes.model.Status;
+import com.sahajsoft.soes.repository.OrderRepository;
 
 @Service
 public class OrderProcessingEngineImpl implements OrderProcessingEngine {

@@ -1,6 +1,6 @@
-package com.sahajsoft.trade.engine;
+package com.sahajsoft.soes.engine;
 
-import com.sahajsoft.trade.model.Order;
+import com.sahajsoft.soes.model.Order;
 
 public interface OrderProcessingEngine {
 

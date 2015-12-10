@@ -1,4 +1,4 @@
-package com.sahajsoft.trade;
+package com.sahajsoft.soes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

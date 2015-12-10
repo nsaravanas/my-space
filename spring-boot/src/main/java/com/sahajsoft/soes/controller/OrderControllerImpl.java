@@ -1,4 +1,4 @@
-package com.sahajsoft.trade.controller;
+package com.sahajsoft.soes.controller;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sahajsoft.trade.model.Order;
-import com.sahajsoft.trade.model.Side;
-import com.sahajsoft.trade.service.OrderService;
+import com.sahajsoft.soes.model.Order;
+import com.sahajsoft.soes.model.Side;
+import com.sahajsoft.soes.service.OrderService;
 
 @RestController
 public class OrderControllerImpl implements OrderController {
