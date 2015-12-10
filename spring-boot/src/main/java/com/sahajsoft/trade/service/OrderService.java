@@ -14,4 +14,6 @@ public interface OrderService {
 
 	void parseCSVInput();
 
+	void generateCSVOutput();
+
 }

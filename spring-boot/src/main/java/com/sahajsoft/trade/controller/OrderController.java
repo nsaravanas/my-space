@@ -12,4 +12,6 @@ public interface OrderController {
 
 	void parseCSVInput();
 
+	void generateOutput();
+
 }

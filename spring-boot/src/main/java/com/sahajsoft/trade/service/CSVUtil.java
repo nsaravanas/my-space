@@ -40,23 +40,28 @@ public class CSVUtil {
 
 		FileReader fileReader = null;
 		CSVParser csvParser = null;
-		CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader(INPUT_FILE_HEADER_MAPPING).withDelimiter(COMMA)
-				.withRecordSeparator(NEW_LINE_SEPARATOR);
+		CSVFormat csvFormat = CSVFormat.DEFAULT.withSkipHeaderRecord().withHeader(INPUT_FILE_HEADER_MAPPING)
+				.withDelimiter(COMMA).withRecordSeparator(NEW_LINE_SEPARATOR);
 
 		try {
 			fileReader = new FileReader(classLoader.getResource(filePath).getFile());
 			csvParser = new CSVParser(fileReader, csvFormat);
 			List<CSVRecord> csvRecords = csvParser.getRecords();
-			for (int i = 1; i < csvRecords.size(); i++) {
-				CSVRecord r = csvRecords.get(i);
+			for (CSVRecord r : csvRecords) {
 				Order order = new Order(new Integer(r.get(STOCKID)), setSide(r.get(SIDE)), r.get(COMPANY),
 						new Long(r.get(QUANTITY)));
 				orders.add(order);
 				System.out.println(order);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOG.error("CSV file read error");
+			LOG.error("CSV file read error " + e);
+		} finally {
+			try {
+				fileReader.close();
+				csvParser.close();
+			} catch (IOException ioe) {
+				LOG.error("Error while closing resource " + ioe);
+			}
 		}
 		return orders;
 	}
@@ -82,21 +87,19 @@ public class CSVUtil {
 		try {
 			fileWriter = new FileWriter(classLoader.getResource(filePath).getPath());
 			csvPrinter = new CSVPrinter(fileWriter, csvFormat);
-			csvPrinter.print(OUTPUT_FILE_HEADER_MAPPING);
 			for (Order o : list) {
-				csvPrinter.printRecord(o.getStockId(), o.getSide(), o.getCompany(), o.getRemainingQuantity(),
-						o.getStatus());
+				csvPrinter.printRecord(o.getStockId(), o.getSide(), o.getCompany(), o.getQuantity(),
+						o.getRemainingQuantity(), o.getStatus());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOG.error("CSV file write error");
+			LOG.error("CSV file write error " + e);
 		} finally {
 			try {
 				fileWriter.flush();
 				fileWriter.close();
 				csvPrinter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ioe) {
+				LOG.error("Error while closing resource " + ioe);
 			}
 		}
 	}

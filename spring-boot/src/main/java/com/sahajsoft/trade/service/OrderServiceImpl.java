@@ -65,10 +65,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void parseCSVInput() {
 		final String filePath = "input.csv";
-		List<Order> orders = CSVUtil.readFile(filePath);
+		CSVUtil.readFile(filePath);
 	}
 
-	public void outputCSVFile() {
+	@Override
+	public void generateCSVOutput() {
 		final String filePath = "output.csv";
 		CSVUtil.writeFile(listOrders(), filePath);
 	}
