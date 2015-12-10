@@ -16,6 +16,7 @@ import com.sahajsoft.soes.model.Side;
 import com.sahajsoft.soes.service.OrderService;
 
 @RestController
+@RequestMapping("/soes")
 public class OrderControllerImpl implements OrderController {
 
 	@Inject
