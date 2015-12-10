@@ -70,6 +70,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
+	public Order getOrder(Integer id) {
+		return this.repository.findOne(id);
+	}
+
+	@Override
 	public boolean parseCSVInput() {
 		try {
 			placeOrders(CSVUtil.readFile(this.inputFilename));

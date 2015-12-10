@@ -16,4 +16,6 @@ public interface OrderService {
 
 	boolean generateCSVOutput();
 
+	Order getOrder(Integer id);
+
 }
