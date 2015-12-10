@@ -12,8 +12,8 @@ public interface OrderService {
 
 	boolean placeOrders(List<Order> orders);
 
-	void parseCSVInput();
+	boolean parseCSVInput();
 
-	void generateCSVOutput();
+	boolean generateCSVOutput();
 
 }

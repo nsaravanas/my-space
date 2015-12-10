@@ -36,10 +36,10 @@ public class CSVUtil {
 	public static List<Order> readFile(String filePath) {
 
 		List<Order> orders = new ArrayList<>();
-		ClassLoader classLoader = CSVUtil.class.getClassLoader();
-
 		FileReader fileReader = null;
 		CSVParser csvParser = null;
+
+		ClassLoader classLoader = CSVUtil.class.getClassLoader();
 		CSVFormat csvFormat = CSVFormat.DEFAULT.withSkipHeaderRecord().withHeader(INPUT_FILE_HEADER_MAPPING)
 				.withDelimiter(COMMA).withRecordSeparator(NEW_LINE_SEPARATOR);
 
@@ -51,7 +51,6 @@ public class CSVUtil {
 				Order order = new Order(new Integer(r.get(STOCKID)), setSide(r.get(SIDE)), r.get(COMPANY),
 						new Long(r.get(QUANTITY)));
 				orders.add(order);
-				System.out.println(order);
 			}
 		} catch (Exception e) {
 			LOG.error("CSV file read error " + e);
@@ -64,6 +63,7 @@ public class CSVUtil {
 			}
 		}
 		return orders;
+
 	}
 
 	private static Side setSide(String side) {
@@ -74,16 +74,17 @@ public class CSVUtil {
 		else if (side.equalsIgnoreCase("SELL"))
 			return Side.SELL;
 		else
-			throw new IllegalArgumentException("Unknown side, [BUY,SELL] allowed");
+			throw new IllegalArgumentException("Unknown side, only [BUY,SELL] allowed");
 	}
 
 	public static void writeFile(List<Order> list, String filePath) {
+
 		FileWriter fileWriter = null;
 		CSVPrinter csvPrinter = null;
 
 		ClassLoader classLoader = CSVUtil.class.getClassLoader();
-
 		CSVFormat csvFormat = CSVFormat.DEFAULT.withHeader(OUTPUT_FILE_HEADER_MAPPING).withDelimiter(COMMA);
+
 		try {
 			fileWriter = new FileWriter(classLoader.getResource(filePath).getPath());
 			csvPrinter = new CSVPrinter(fileWriter, csvFormat);
@@ -102,13 +103,7 @@ public class CSVUtil {
 				LOG.error("Error while closing resource " + ioe);
 			}
 		}
-	}
 
-	public static void main(String[] args) {
-		readFile("input.csv");
-		List<Order> orders = new ArrayList<>();
-		orders.add(new Order(1, Side.SELL, "ABC", 100L));
-		writeFile(orders, "output.csv");
 	}
 
 }

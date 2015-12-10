@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public class Order {
 
 	@Id
+	@NotNull
 	@Column(name = "STOCK_ID")
 	private Integer stockId;
 
@@ -36,20 +37,18 @@ public class Order {
 	@Column(name = "QUANTITY")
 	private Long quantity;
 
-	@NotNull
 	@Column(name = "STATUS")
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.OPEN;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "RECEIVED_TIME")
-	private Date receivedTime = new Date();
+	private Date receivedTime;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATED_TIME")
 	private Date updatedTime;
 
-	@NotNull
 	@Column(name = "REMAINING_QUANTITY")
 	private Long remainingQuantity;
 
@@ -66,6 +65,9 @@ public class Order {
 		this.side = side;
 		this.company = company;
 		this.quantity = quantity;
+		this.remainingQuantity = quantity;
+		this.receivedTime = new Date();
+
 	}
 
 	public Long getVersion() {

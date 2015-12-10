@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Inject
 	private OrderProcessingEngine engine;
+
+	@Value("${input.filename}")
+	private String inputFilename;
+
+	@Value("${output.filename}")
+	private String outputFilename;
 
 	@Override
 	@Transactional
@@ -63,15 +70,23 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void parseCSVInput() {
-		final String filePath = "input.csv";
-		CSVUtil.readFile(filePath);
+	public boolean parseCSVInput() {
+		try {
+			placeOrders(CSVUtil.readFile(this.inputFilename));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
-	public void generateCSVOutput() {
-		final String filePath = "output.csv";
-		CSVUtil.writeFile(listOrders(), filePath);
+	public boolean generateCSVOutput() {
+		try {
+			CSVUtil.writeFile(listOrders(), this.outputFilename);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

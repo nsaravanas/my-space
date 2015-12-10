@@ -15,7 +15,7 @@ import com.sahajsoft.trade.model.Order;
 import com.sahajsoft.trade.model.Side;
 import com.sahajsoft.trade.service.OrderService;
 
-@RestController("/soes")
+@RestController
 public class OrderControllerImpl implements OrderController {
 
 	@Inject
@@ -48,13 +48,15 @@ public class OrderControllerImpl implements OrderController {
 
 	@Override
 	@RequestMapping("/readInput")
-	public void parseCSVInput() {
-		this.service.parseCSVInput();
+	@ResponseBody
+	public boolean parseCSVInput() {
+		return this.service.parseCSVInput();
 	}
 
 	@Override
 	@RequestMapping("/generateOutput")
-	public void generateOutput() {
-		this.service.generateCSVOutput();
+	@ResponseBody
+	public boolean generateOutput() {
+		return this.service.generateCSVOutput();
 	}
 }
