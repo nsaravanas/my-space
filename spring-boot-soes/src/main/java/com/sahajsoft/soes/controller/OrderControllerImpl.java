@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,7 @@ public class OrderControllerImpl implements OrderController {
 	@Override
 	@RequestMapping("/listOrders")
 	@ResponseBody
-	public List<Order> listOrders() {
+	public @ModelAttribute("orders") List<Order> listOrders() {
 		return this.service.listOrders();
 	}
 

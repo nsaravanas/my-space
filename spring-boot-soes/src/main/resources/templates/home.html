@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<title>Stock Order Execution System</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>STOCK_ID</th>
+			<th>SIDE</th>
+			<th>COMPANY</th>
+			<th>QUANTITY</th>
+			<th>REMAINING_QUANTITY</th>
+			<th>STATUS</th>
+		</tr>
+		<tr th:each="order : ${orders}">
+			<td th:text="${order.stockId}">Onions</td>
+			<td th:text="${order.side}">Onions</td>
+			<td th:text="${order.company}">Onions</td>
+			<td th:text="${order.quantity}">Onions</td>
+			<td th:text="${order.remainingQuantity}">Onions</td>
+			<td th:text="${order.status}">Onions</td>
+		</tr>
+
+	</table>
+</body>
+</html>
