@@ -1,17 +1,19 @@
 package com.sahajsoft.soes.controller;
 
-import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sahajsoft.soes.model.Order;
 
 public interface OrderController {
 
-	List<Order> listOrders();
+	ModelAndView listOrders();
 
 	boolean placeOrder(Order order);
 
 	boolean parseCSVInput();
 
 	boolean generateOutput();
+
+	String home();
 
 }

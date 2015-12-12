@@ -1,28 +1,68 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<title>Stock Order Execution System</title>
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<title>SOES</title>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<style type="text/css">
+body {
+	margin: 50px 0;
+}
+
+div.panel-body {
+	border-bottom: 1px solid #ccc;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+div.actions form {
+	display: inline-block;
+}
+</style>
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>STOCK_ID</th>
-			<th>SIDE</th>
-			<th>COMPANY</th>
-			<th>QUANTITY</th>
-			<th>REMAINING_QUANTITY</th>
-			<th>STATUS</th>
-		</tr>
-		<tr th:each="order : ${orders}">
-			<td th:text="${order.stockId}">Onions</td>
-			<td th:text="${order.side}">Onions</td>
-			<td th:text="${order.company}">Onions</td>
-			<td th:text="${order.quantity}">Onions</td>
-			<td th:text="${order.remainingQuantity}">Onions</td>
-			<td th:text="${order.status}">Onions</td>
-		</tr>
 
-	</table>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-18" align="center">
+				<div class="panel panel-default">
+					<!-- <div class="panel-heading">Stock Order Execution System</div> -->
+					<div class="panel-body">
+						<h1>Stock Order Execution System</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div align="center">
+		<table border="1" style="width: 80%">
+			<tr>
+				<th>STOCK_ID</th>
+				<th>SIDE</th>
+				<th>COMPANY</th>
+				<th>QUANTITY</th>
+				<th>REMAINING_QUANTITY</th>
+				<th>STATUS</th>
+			</tr>
+			<tr th:each="order : ${orders}">
+				<td th:text="${order.stockId}"></td>
+				<td th:text="${order.side}"></td>
+				<td th:text="${order.company}"></td>
+				<td th:text="${order.quantity}"></td>
+				<td th:text="${order.remainingQuantity}"></td>
+				<td th:text="${order.status}"></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
