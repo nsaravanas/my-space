@@ -1,4 +1,4 @@
-package com.sahajsoft.soes.service;
+package com.sahajsoft.soes.io.util;
 
 import java.io.FileReader;
 import java.io.FileWriter;
