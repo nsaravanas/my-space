@@ -33,13 +33,14 @@ public class OrderControllerImpl implements OrderController {
 
 	@Override
 	@RequestMapping(name = "/placeOrder", method = { RequestMethod.POST, RequestMethod.GET })
-	public String placeOrder(@ModelAttribute @Valid Order order, RedirectAttributes redirectAttributes,
+	public String placeOrder(@ModelAttribute("order") @Valid Order order, RedirectAttributes redirectAttributes,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
+			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.order", bindingResult);
+			redirectAttributes.addFlashAttribute("order", order);
 			return "redirect:/";
 		}
 		this.service.placeOrder(order);
-		// model.addAttribute("order", order);
 		redirectAttributes.addFlashAttribute("message", "Order with order id " + order.getStockId() + " placed.");
 		return "redirect:/";
 	}
