@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +33,11 @@ public class OrderControllerImpl implements OrderController {
 
 	@Override
 	@RequestMapping(name = "/placeOrder", method = { RequestMethod.POST, RequestMethod.GET })
-	public String placeOrder(@ModelAttribute @Valid Order order, RedirectAttributes redirectAttributes) {
+	public String placeOrder(@ModelAttribute @Valid Order order, RedirectAttributes redirectAttributes,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/";
+		}
 		this.service.placeOrder(order);
 		// model.addAttribute("order", order);
 		redirectAttributes.addFlashAttribute("message", "Order with order id " + order.getStockId() + " placed.");

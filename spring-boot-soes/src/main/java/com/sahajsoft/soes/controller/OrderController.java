@@ -1,5 +1,6 @@
 package com.sahajsoft.soes.controller;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -15,6 +16,6 @@ public interface OrderController {
 
 	ModelAndView home();
 
-	String placeOrder(Order order, RedirectAttributes redirectAttributes);
+	String placeOrder(Order order, RedirectAttributes redirectAttributes, BindingResult bindingResult);
 
 }

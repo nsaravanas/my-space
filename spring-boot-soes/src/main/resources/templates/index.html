@@ -16,15 +16,49 @@
 	</div>
 	<div align="left">
 		<h2>Stock Order Execution System - Place Order</h2>
+
 		<form th:action="@{/placeOrder}" th:object="${order}" method="post">
+			<table>
+				<tr>
+					<td>Stock Id :</td>
+					<td><input type="number" th:field="*{stockId}" /></td>
+					<td th:if="${#fields.hasErrors('stockId')}" th:errors="*{stockId}">Name
+						Error</td>
+				</tr>
+				<tr>
+					<td>Side :</td>
+					<td><input type="text" th:field="*{side}" /></td>
+					<td th:if="${#fields.hasErrors('side')}" th:errors="*{side}">Name
+						Error</td>
+				</tr>
+				<tr>
+					<td>Company :</td>
+					<td><input type="text" th:field="*{company}" /></td>
+					<td th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Name
+						Error</td>
+				</tr>
+				<tr>
+					<td>Quantity :</td>
+					<td><input type="text" th:field="*{quantity}" /></td>
+					<td th:if="${#fields.hasErrors('quantity')}"
+						th:errors="*{quantity}">Name Error</td>
+				</tr>
+				<tr>
+					<td><button type="submit">Submit</button></td>
+					<td><button type="reset">Reset</button></td>
+				</tr>
+			</table>
+		</form>
+
+<!-- 		<form th:action="@{/placeOrder}" th:object="${order}" method="post">
 			<p>
 				Stock Id : <input type="number" th:field="*{stockId}" />
 			</p>
 			<p>
-				Side     : <input type="text" th:field="*{side}" />
+				Side : <input type="text" th:field="*{side}" />
 			</p>
 			<p>
-				Company  : <input type="text" th:field="*{company}" />
+				Company : <input type="text" th:field="*{company}" />
 			</p>
 			<p>
 				Quantity : <input type="number" th:field="*{quantity}" />
@@ -33,7 +67,7 @@
 				<input type="submit" value="Submit" /> <input type="reset"
 					value="Reset" />
 			</p>
-		</form>
+		</form> -->
 	</div>
 	<div align="center">
 		<h2>Stock Order Execution System - Order List</h2>
