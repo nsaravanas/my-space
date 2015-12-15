@@ -24,7 +24,7 @@ public class OrderControllerImpl implements OrderController {
 	private OrderService service;
 
 	@Override
-	@RequestMapping("/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home() {
 		final Map<String, Object> model = new HashMap<>();
 		model.put("orders", this.service.listOrders());
@@ -32,7 +32,7 @@ public class OrderControllerImpl implements OrderController {
 	}
 
 	@Override
-	@RequestMapping(name = "/placeOrder", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(name = "/", method = RequestMethod.POST)
 	public String placeOrder(@ModelAttribute("order") @Valid Order order, RedirectAttributes redirectAttributes,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
