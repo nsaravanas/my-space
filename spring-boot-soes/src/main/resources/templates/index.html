@@ -10,14 +10,34 @@
 		<h1>Stock Order Execution System</h1>
 	</div>
 	<hr />
-	<!--<div align="center">
-		<h2>Stock Order Execution System - Place Order</h2>
-	</div>
 
-	<hr />
+	<div th:if="${message}">
+		<div align="center" class="alert alert-info" th:text="${message}"></div>
+	</div>
+	<div align="left">
+		<h2>Stock Order Execution System - Place Order</h2>
+		<form th:action="@{/placeOrder}" th:object="${order}" method="post">
+			<p>
+				Stock Id : <input type="number" th:field="*{stockId}" />
+			</p>
+			<p>
+				Side     : <input type="text" th:field="*{side}" />
+			</p>
+			<p>
+				Company  : <input type="text" th:field="*{company}" />
+			</p>
+			<p>
+				Quantity : <input type="number" th:field="*{quantity}" />
+			</p>
+			<p>
+				<input type="submit" value="Submit" /> <input type="reset"
+					value="Reset" />
+			</p>
+		</form>
+	</div>
 	<div align="center">
 		<h2>Stock Order Execution System - Order List</h2>
-	</div> -->
+	</div>
 	<div align="center">
 		<table border="1" style="width: 80%">
 			<tr>
@@ -29,12 +49,12 @@
 				<th>STATUS</th>
 			</tr>
 			<tr th:each="order : ${orders}">
-				<td th:text="${order.stockId}"></td>
-				<td th:text="${order.side}"></td>
-				<td th:text="${order.company}"></td>
-				<td th:text="${order.quantity}"></td>
-				<td th:text="${order.remainingQuantity}"></td>
-				<td th:text="${order.status}"></td>
+				<td width="20%" th:text="${order.stockId}"></td>
+				<td width="20%" th:text="${order.side}"></td>
+				<td width="20%" th:text="${order.company}"></td>
+				<td width="20%" th:text="${order.quantity}"></td>
+				<td width="20%" th:text="${order.remainingQuantity}"></td>
+				<td width="20%" th:text="${order.status}"></td>
 			</tr>
 		</table>
 	</div>

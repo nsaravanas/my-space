@@ -1,19 +1,20 @@
 package com.sahajsoft.soes.controller;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sahajsoft.soes.model.Order;
 
 public interface OrderController {
 
-	ModelAndView listOrders();
+	String listOrders();
 
-	boolean placeOrder(Order order);
+	String parseCSVInput(RedirectAttributes redirectAttributes);
 
-	boolean parseCSVInput();
+	String generateOutput(RedirectAttributes redirectAttributes);
 
-	boolean generateOutput();
+	ModelAndView home();
 
-	String home();
+	String placeOrder(Order order, RedirectAttributes redirectAttributes);
 
 }

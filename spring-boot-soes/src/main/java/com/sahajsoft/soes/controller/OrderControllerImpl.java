@@ -10,15 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sahajsoft.soes.model.Order;
-import com.sahajsoft.soes.model.Side;
 import com.sahajsoft.soes.service.OrderService;
 
 @Controller
-@RequestMapping("/soes")
 public class OrderControllerImpl implements OrderController {
 
 	@Inject
@@ -26,46 +24,45 @@ public class OrderControllerImpl implements OrderController {
 
 	@Override
 	@RequestMapping("/")
-	public String home() {
-		return "index";
-	}
-
-	@Override
-	@RequestMapping(name = "/placeOrder", method = RequestMethod.POST)
-	public boolean placeOrder(@ModelAttribute @Valid Order order) {
-		return this.service.placeOrder(order);
-	}
-
-	@Override
-	@RequestMapping("/listOrders")
-	public ModelAndView listOrders() {
+	public ModelAndView home() {
 		final Map<String, Object> model = new HashMap<>();
 		model.put("orders", this.service.listOrders());
 		return new ModelAndView("index", model);
 	}
 
-	@RequestMapping("/sample")
-	@ResponseBody
-	public Order sampleOrder() {
-		Order o = new Order();
-		o.setCompany("ABC");
-		o.setQuantity(100L);
-		o.setSide(Side.BUY);
-		o.setStockId(123);
-		return o;
+	@Override
+	@RequestMapping(name = "/placeOrder", method = { RequestMethod.POST, RequestMethod.GET })
+	public String placeOrder(@ModelAttribute @Valid Order order, RedirectAttributes redirectAttributes) {
+		this.service.placeOrder(order);
+		// model.addAttribute("order", order);
+		redirectAttributes.addFlashAttribute("message", "Order with order id " + order.getStockId() + " placed.");
+		return "redirect:/";
+	}
+
+	@Override
+	@RequestMapping("/listOrders")
+	public String listOrders() {
+		return "redirect:/";
 	}
 
 	@Override
 	@RequestMapping("/readInput")
-	@ResponseBody
-	public boolean parseCSVInput() {
-		return this.service.parseCSVInput();
+	public String parseCSVInput(RedirectAttributes redirectAttributes) {
+		this.service.parseCSVInput();
+		redirectAttributes.addFlashAttribute("message", "CSV input parsed and placed orders");
+		return "redirect:/";
 	}
 
 	@Override
 	@RequestMapping("/generateOutput")
-	@ResponseBody
-	public boolean generateOutput() {
-		return this.service.generateCSVOutput();
+	public String generateOutput(RedirectAttributes redirectAttributes) {
+		this.service.generateCSVOutput();
+		redirectAttributes.addFlashAttribute("message", "CSV output generated");
+		return "redirect:/";
+	}
+
+	@ModelAttribute("order")
+	public Order createOrder() {
+		return new Order();
 	}
 }
