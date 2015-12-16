@@ -18,4 +18,6 @@ public interface OrderController {
 
 	String placeOrder(Order order, RedirectAttributes redirectAttributes, BindingResult bindingResult);
 
+	ModelAndView globalError(Exception e);
+
 }

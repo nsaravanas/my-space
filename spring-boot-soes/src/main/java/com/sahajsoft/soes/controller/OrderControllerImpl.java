@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -70,5 +71,13 @@ public class OrderControllerImpl implements OrderController {
 	@ModelAttribute("order")
 	public Order createOrder() {
 		return new Order();
+	}
+
+	@Override
+	@ExceptionHandler(Exception.class)
+	public ModelAndView globalError(Exception e) {
+		final Map<String, Object> model = new HashMap<>();
+		model.put("message", "Exception occured, " + e.getMessage());
+		return new ModelAndView("error", model);
 	}
 }
