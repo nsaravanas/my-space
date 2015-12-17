@@ -102,12 +102,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void processFile(MultipartFile myFile) {
+	public boolean processFile(MultipartFile myFile) {
 		try {
 			this.placeOrders(CSVUtil.readFile(myFile.getInputStream()));
+			return true;
 		} catch (IOException e) {
 			LOG.error("Error while reading File " + e);
 		}
+		return false;
 	}
 
 	@Override

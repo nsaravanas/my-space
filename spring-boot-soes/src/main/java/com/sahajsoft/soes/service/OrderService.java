@@ -21,7 +21,7 @@ public interface OrderService {
 
 	Order getOrder(Integer id);
 
-	void processFile(MultipartFile myFile);
+	boolean processFile(MultipartFile myFile);
 
 	FileSystemResource downloadFile();
 
