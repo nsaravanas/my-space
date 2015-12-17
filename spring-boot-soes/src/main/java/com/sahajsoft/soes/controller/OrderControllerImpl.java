@@ -6,12 +6,16 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -71,6 +75,22 @@ public class OrderControllerImpl implements OrderController {
 	@ModelAttribute("order")
 	public Order createOrder() {
 		return new Order();
+	}
+
+	@Override
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	@ResponseBody
+	public FileSystemResource downloadFile() {
+		this.service.generateCSVOutput();
+		return this.service.downloadFile();
+	}
+
+	@Override
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String uploadFile(@RequestParam("myFile") MultipartFile myFile, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("message", "File upload successful.");
+		this.service.processFile(myFile);
+		return "redirect:/";
 	}
 
 	@Override

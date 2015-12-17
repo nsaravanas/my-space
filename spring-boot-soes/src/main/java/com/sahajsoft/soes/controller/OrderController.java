@@ -1,6 +1,8 @@
 package com.sahajsoft.soes.controller;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,5 +21,9 @@ public interface OrderController {
 	String placeOrder(Order order, RedirectAttributes redirectAttributes, BindingResult bindingResult);
 
 	ModelAndView globalError(Exception e);
+
+	FileSystemResource downloadFile();
+
+	String uploadFile(MultipartFile myFile, RedirectAttributes redirectAttributes);
 
 }

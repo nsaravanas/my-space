@@ -1,9 +1,14 @@
 package com.sahajsoft.soes.io.util;
 
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
@@ -33,19 +38,18 @@ public class CSVUtil {
 
 	private static final Logger LOG = Logger.getLogger(CSVUtil.class);
 
-	public static List<Order> readFile(String filePath) {
+	public static List<Order> readFile(InputStream inputStream) {
 
 		List<Order> orders = new ArrayList<>();
-		FileReader fileReader = null;
 		CSVParser csvParser = null;
+		BufferedReader reader = null;
 
-		ClassLoader classLoader = CSVUtil.class.getClassLoader();
 		CSVFormat csvFormat = CSVFormat.DEFAULT.withSkipHeaderRecord().withHeader(INPUT_FILE_HEADER_MAPPING)
 				.withDelimiter(COMMA).withRecordSeparator(NEW_LINE_SEPARATOR);
 
 		try {
-			fileReader = new FileReader(classLoader.getResource(filePath).getFile());
-			csvParser = new CSVParser(fileReader, csvFormat);
+			reader = new BufferedReader(new InputStreamReader(inputStream));
+			csvParser = new CSVParser(reader, csvFormat);
 			List<CSVRecord> csvRecords = csvParser.getRecords();
 			for (CSVRecord r : csvRecords) {
 				Order order = new Order(new Integer(r.get(STOCKID)), setSide(r.get(SIDE)), r.get(COMPANY),
@@ -56,13 +60,32 @@ public class CSVUtil {
 			LOG.error("CSV file read error " + e);
 		} finally {
 			try {
-				fileReader.close();
+				reader.close();
 				csvParser.close();
 			} catch (IOException ioe) {
 				LOG.error("Error while closing resource " + ioe);
 			}
 		}
+
 		return orders;
+	}
+
+	public static List<Order> readFile(String filePath) {
+		ClassLoader classLoader = CSVUtil.class.getClassLoader();
+		InputStream inputStream = null;
+		try {
+			inputStream = new FileInputStream(classLoader.getResource(filePath).getFile());
+			return readFile(inputStream);
+		} catch (FileNotFoundException e) {
+			LOG.error("File not found at path " + filePath);
+		} finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				LOG.error("Error while closing resource " + e);
+			}
+		}
+		return Collections.emptyList();
 
 	}
 

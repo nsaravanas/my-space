@@ -1,5 +1,7 @@
 package com.sahajsoft.soes.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,9 +9,12 @@ import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.sahajsoft.soes.controller.OrderControllerImpl;
 import com.sahajsoft.soes.engine.OrderProcessingEngine;
 import com.sahajsoft.soes.io.util.CSVUtil;
 import com.sahajsoft.soes.model.Order;
@@ -71,10 +76,15 @@ public class OrderServiceImpl implements OrderService {
 		return this.repository.findOne(id);
 	}
 
+	public boolean parseCSVInput(File inputFile) {
+		return false;
+
+	}
+
 	@Override
 	public boolean parseCSVInput() {
 		try {
-			placeOrders(CSVUtil.readFile(this.inputFilename));
+			this.placeOrders(CSVUtil.readFile(this.inputFilename));
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -89,6 +99,21 @@ public class OrderServiceImpl implements OrderService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	@Override
+	public void processFile(MultipartFile myFile) {
+		try {
+			this.placeOrders(CSVUtil.readFile(myFile.getInputStream()));
+		} catch (IOException e) {
+			LOG.error("Error while reading File " + e);
+		}
+	}
+
+	@Override
+	public FileSystemResource downloadFile() {
+		final ClassLoader classLoader = OrderControllerImpl.class.getClassLoader();
+		return new FileSystemResource(classLoader.getResource(this.outputFilename).getFile());
 	}
 
 }

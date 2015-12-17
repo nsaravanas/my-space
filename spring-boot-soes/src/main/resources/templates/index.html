@@ -11,6 +11,15 @@
 	</div>
 	<hr />
 
+	Download Report :
+	<a th:href="@{/download}"><span th:text="report"></span></a>
+	<br /> Upload Input :
+	<form th:action="@{/upload}" method="post"
+		enctype="multipart/form-data">
+		<input type="file" name="myFile" /> <input type="submit" />
+	</form>
+	<br />
+	<hr />
 	<div th:if="${message}">
 		<div align="center" class="alert alert-info" th:text="${message}"></div>
 	</div>
