@@ -1,6 +1,8 @@
 package com.spring.boot.angular.model;
 
-import java.util.Arrays;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,19 +11,27 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Company {
 
 	@Id
+	@NotNull
 	private int companyID;
 
+	@NotNull
 	private String name;
+	@NotNull
 	private Address address;
-	private String[] email;
-	private String[] phoneNumber;
-	private String[] owners;
+
+	private List<String> email;
+
+	private List<String> phoneNumber;
+
+	@NotNull
+	private List<String> owners;
 
 	public Company() {
 		super();
 	}
 
-	public Company(int companyID, String name, Address address, String[] email, String[] phoneNumber, String[] owners) {
+	public Company(int companyID, String name, Address address, List<String> email, List<String> phoneNumber,
+			List<String> owners) {
 		super();
 		this.companyID = companyID;
 		this.name = name;
@@ -55,35 +65,33 @@ public class Company {
 		this.address = address;
 	}
 
-	public String[] getEmail() {
+	public List<String> getEmail() {
 		return email;
 	}
 
-	public void setEmail(String[] email) {
+	public void setEmail(List<String> email) {
 		this.email = email;
 	}
 
-	public String[] getPhoneNumber() {
+	public List<String> getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String[] phoneNumber) {
+	public void setPhoneNumber(List<String> phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String[] getOwners() {
+	public List<String> getOwners() {
 		return owners;
 	}
 
-	public void setOwners(String[] owners) {
+	public void setOwners(List<String> owners) {
 		this.owners = owners;
 	}
 
 	@Override
 	public String toString() {
-		return "Company [companyID=" + companyID + ", name=" + name + ", address=" + address + ", email="
-				+ Arrays.toString(email) + ", phoneNumber=" + Arrays.toString(phoneNumber) + ", owners="
-				+ Arrays.toString(owners) + "]";
+		return "Company [companyID=" + companyID + ", name=" + name + ", address=" + address + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", owners=" + owners + "]";
 	}
-
 }

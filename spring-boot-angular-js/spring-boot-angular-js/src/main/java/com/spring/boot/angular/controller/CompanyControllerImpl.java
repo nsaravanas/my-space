@@ -21,7 +21,7 @@ public class CompanyControllerImpl implements CompanyController {
 	private CompanyService companyService;
 
 	@Override
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/companies", method = RequestMethod.PUT)
 	public boolean createCompany(@RequestBody @Valid Company company) {
 		return this.companyService.createCompany(company);
 	}

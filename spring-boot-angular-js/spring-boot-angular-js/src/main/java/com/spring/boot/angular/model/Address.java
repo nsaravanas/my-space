@@ -1,11 +1,21 @@
 package com.spring.boot.angular.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Address {
 
 	private String no;
+
+	@NotNull
 	private String street;
+
+	@NotNull
 	private String city;
+
+	@NotNull
 	private String country;
+
+	@NotNull
 	private int zipCode;
 
 	public Address() {
@@ -66,4 +76,5 @@ public class Address {
 		return "Address [no=" + no + ", street=" + street + ", city=" + city + ", country=" + country + ", zipCode="
 				+ zipCode + "]";
 	}
+
 }
