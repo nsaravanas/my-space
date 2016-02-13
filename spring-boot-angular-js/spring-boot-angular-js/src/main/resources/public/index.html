@@ -3,10 +3,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Angular JS</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script src="./js/mainModule.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="./js/company.js"></script>
+<script src="./js/companyService.js"></script>
 </head>
-<body ng-app="mainModule">
-	<div ng-controller="mainController as main">{{name}} {{age}}</div>
+<body data-ng-app="company">
+	<div data-ng-controller="companyController as cc">
+		<span data-ng-repeat="c in companies">
+				Company ID : {{c.companyID}}<br/>
+				Company Name : {{c.name}}<br/>
+				Company Address :	<br>		 
+					No 			: {{c.address.no}}<br/>
+					Street  	: {{c.address.street}}<br/>
+					City 		: {{c.address.city}}<br/>
+					Country 	: {{c.address.country}}<br/>
+					Postal code : {{c.address.zipCode}}<br/>
+				Email 		  : {{c.email}}<br/>
+				Phone numbers : {{c.phoneNumber}}<br/>
+				Owners 		  : {{c.owners}}<br/>
+				<br />
+		</span>
+	</div>
 </body>
 </html>
