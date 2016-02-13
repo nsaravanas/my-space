@@ -1,4 +1,4 @@
-angular.module('companyService', []).service('companyUtil', function($http) {
+app.service('companyService', function($http) {
 	delete $http.defaults.headers.common['X-Requested-With'];
 	this.getData = function() {
 		return $http({
