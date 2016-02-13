@@ -8,23 +8,47 @@
 <script src="./js/company.js"></script>
 <script src="./js/companyService.js"></script>
 <script src="./js/companyController.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
-<body data-ng-app="company">
-	<div data-ng-controller="companyController as cc">
-		<span data-ng-repeat="c in companies">
-				Company ID : {{c.companyID}}<br/>
-				Company Name : {{c.name}}<br/>
-				Company Address :	<br>		 
-					No 			: {{c.address.no}}<br/>
-					Street  	: {{c.address.street}}<br/>
-					City 		: {{c.address.city}}<br/>
-					Country 	: {{c.address.country}}<br/>
-					Postal code : {{c.address.zipCode}}<br/>
-				Email 		  : {{c.email}}<br/>
-				Phone numbers : {{c.phoneNumber}}<br/>
-				Owners 		  : {{c.owners}}<br/>
-				<br />
-		</span>
-	</div>
+<body data-ng-app="company">	
+	<div data-ng-controller="companyController as cc">	
+		<form name="createCompany" novalidate >
+			<table>
+				<tr><td>Company ID</td><td><input type="text" data-ng-model="c.companyID" name="companyID" required/></td></tr>
+				<tr><td>Company Name</td><td><input type="text" data-ng-model="c.name" name="name" required/></td></tr>
+				<tr><td>Company Address</td><td> </td></tr>
+				<tr><td>No</td><td> <input type="text" data-ng-model="c.address.no" name="address_no" required/></td></tr>
+				<tr><td>Street</td><td> <input type="text" data-ng-model="c.address.street" name="address_street" required/></td></tr>
+				<tr><td>City</td><td> <input type="text" data-ng-model="c.address.city" name="address_city" required/></td></tr>
+				<tr><td>Country</td><td> <input type="text" data-ng-model="c.address.country" name="address_country" required/></td></tr>
+				<tr><td>Postal Code</td><td> <input type="text" data-ng-model="c.address.zipCode" name="address_zipCode" required/></td></tr>
+				<tr><td>Email</td><td> <input type="text" data-ng-model="c.email" name="email" required/></td></tr>
+				<tr><td>Phone Numbers</td><td> <input type="text" data-ng-model="c.phoneNumber" name="phoneNumber" required/></td></tr>
+				<tr><td>Owner</td><td> <input type="text" data-ng-model="c.owners" name="owners" required/></td></tr>
+				<tr><td><input type="button" data-ng-click="reset()" value="Reset"></td><td><input type="submit" data-ng-click="save(user)" value="Save"></td></tr>
+			</table>
+		</form>
+	<br/>
+	<br/>
+	LIST ALL COMPANIES:- 
+	<br>
+	<br/>	
+		<div data-ng-repeat="c in companies">
+			<table>
+				<tr><td>Company ID</td><td>{{c.companyID}}</td></tr>
+				<tr><td>Company Name</td><td>{{c.name}}</td></tr>
+				<tr><td>Company Address</td><td> </td></tr>
+				<tr><td>No</td><td> {{c.address.no}}</td></tr>
+				<tr><td>Street</td><td> {{c.address.street}}</td></tr>
+				<tr><td>City</td><td> {{c.address.city}}</td></tr>
+				<tr><td>Country</td><td> {{c.address.country}}</td></tr>
+				<tr><td>Postal Code</td><td> {{c.address.zipCode}}</td></tr>
+				<tr><td>Email</td><td> {{c.email}}</td></tr>
+				<tr><td>Phone Numbers</td><td> {{c.phoneNumber}}</td></tr>
+				<tr><td>Owner</td><td> {{c.owners}}</td></tr>
+			</table>
+			<br>
+		</div>
+	</div>	
 </body>
 </html>
