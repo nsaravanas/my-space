@@ -20,9 +20,9 @@ public class Company {
 	@NotNull
 	private Address address;
 
-	private List<String> email;
+	private String email;
 
-	private List<String> phoneNumber;
+	private String phoneNumber;
 
 	@NotNull
 	private List<String> owners;
@@ -31,8 +31,7 @@ public class Company {
 		super();
 	}
 
-	public Company(int companyID, String name, Address address, List<String> email, List<String> phoneNumber,
-			List<String> owners) {
+	public Company(int companyID, String name, Address address, String email, String phoneNumber, List<String> owners) {
 		super();
 		this.companyID = companyID;
 		this.name = name;
@@ -66,19 +65,19 @@ public class Company {
 		this.address = address;
 	}
 
-	public List<String> getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(List<String> email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public List<String> getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(List<String> phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -90,9 +89,4 @@ public class Company {
 		this.owners = owners;
 	}
 
-	@Override
-	public String toString() {
-		return "Company [companyID=" + companyID + ", name=" + name + ", address=" + address + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", owners=" + owners + "]";
-	}
 }

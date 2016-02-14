@@ -10,7 +10,7 @@ app.controller('companyController', [ '$scope', 'companyService',
 			$scope.newCompany = null;
 			
 			$scope.save = function(newCompany){				
-				console.log('Controller JSON '+newCompany);
+				console.log('Controller JSON '+JSON.stringify(newCompany));
 				companyService.addCompany(newCompany).then(function(dataResponse) {
 					$scope.newCompany = dataResponse.data;
 				});
@@ -19,7 +19,7 @@ app.controller('companyController', [ '$scope', 'companyService',
 			$scope.updatedCompany = null;
 			
 			companyService.updateCompany($scope.updatedCompany).then(function(dataResponse) {
-				$scope.updateCompany = dataResponse.data;
+				$scope.updatedCompany = dataResponse.data;
 			});	
 			
 			$scope.company = null;

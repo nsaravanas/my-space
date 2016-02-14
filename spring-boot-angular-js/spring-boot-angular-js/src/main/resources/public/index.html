@@ -8,67 +8,204 @@
 <script src="./js/company.js"></script>
 <script src="./js/companyService.js"></script>
 <script src="./js/companyController.js"></script>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
-<body data-ng-app="company">	
-	<div data-ng-controller="companyController as cc">	
-		<form name="createCompany" novalidate >
-			<table>
-				<tr><td>Company ID</td><td><input type="number" data-ng-model="newCompany.companyID" name="companyID" required/></td></tr>
-				<tr><td>Company Name</td><td><input type="text" data-ng-model="newCompany.name" name="name" required/></td></tr>
-				<tr><td>Company Address</td><td> </td></tr>
-				<tr><td>No</td><td> <input type="text" data-ng-model="newCompany.address.no" name="address_no" required/></td></tr>
-				<tr><td>Street</td><td> <input type="text" data-ng-model="newCompany.address.street" name="address_street" required/></td></tr>
-				<tr><td>City</td><td> <input type="text" data-ng-model="newCompany.address.city" name="address_city" required/></td></tr>
-				<tr><td>Country</td><td> <input type="text" data-ng-model="newCompany.address.country" name="address_country" required/></td></tr>
-				<tr><td>Postal Code</td><td> <input type="number" data-ng-model="newCompany.address.zipCode" name="address_zipCode" required/></td></tr>
-				<tr><td>Email</td><td> <input type="email" data-ng-model="newCompany.email" name="email" data-ng-list required/></td></tr>
-				<tr><td>Phone Numbers</td><td> <input type="tel" data-ng-model="newCompany.phoneNumber" data-ng-list name="phoneNumber" required/></td></tr>
-				<tr><td>Owner</td><td> <input type="text" data-ng-model="newCompany.owners" data-ng-list name="owners" required/></td></tr>
-				<tr><td><input type="button" data-ng-click="reset()" value="Reset"></td><td><input type="submit" data-ng-click="save(newCompany)" value="Save"></td></tr>
-			</table>
+<body data-ng-app="company">
+	<div data-ng-controller="companyController as cc">
+		<h1 class="thick-heading">Create Company</h1>
+		<form class="form-inline" role="form" name="createCompany" novalidate>
+			<div class="form-group">
+				<label class="sr-only" for="name">Company ID</label> <input
+					class="form-control" type="number"
+					data-ng-model="newCompany.companyID" name="companyID" required
+					placeholder="Company ID" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Company Name</label> <input
+					class="form-control" type="text" data-ng-model="newCompany.name"
+					name="name" required placeholder="Company Name" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">No</label> <input
+					class="form-control" type="text"
+					data-ng-model="newCompany.address.no" name="address_no" required
+					placeholder="Address Door No" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Street</label> <input
+					class="form-control" type="text"
+					data-ng-model="newCompany.address.street" name="address_street"
+					required placeholder="Street" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">City</label> <input
+					class="form-control" type="text"
+					data-ng-model="newCompany.address.city" name="address_city"
+					required placeholder="City" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Country</label> <input
+					class="form-control" type="text"
+					data-ng-model="newCompany.address.country" name="address_country"
+					required placeholder="Country" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Postal Code</label> <input
+					class="form-control" type="number"
+					data-ng-model="newCompany.address.zipCode" name="address_zipCode"
+					required placeholder="zip/postal code" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Email</label> <input
+					class="form-control" type="email" data-ng-model="newCompany.email"
+					name="email" required placeholder="Email ID" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Phone Numbers</label> <input
+					class="form-control" type="tel"
+					data-ng-model="newCompany.phoneNumber" name="phoneNumber" required
+					placeholder="Phone Numbers, comma seperated" />
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="sr-only" for="name">Owner</label> <input
+					class="form-control" type="text" data-ng-model="newCompany.owners"
+					data-ng-list name="owners" required
+					placeholder="Company Owners, comma seperated" />
+			</div>
+			<br />
+			<div class="form-group">
+				<button type="reset" class="btn btn-warning" data-ng-click="reset()">Reset</button>
+				<button type="submit" class="btn btn-success"
+					data-ng-click="save(newCompany)">Save</button>
+			</div>
+			<br />
 		</form>
-	<br/>
-	<br/>
-	GET COMPANY:- 
-	<br>
-	<br/>
+
+
+		<h1 class="thick-heading">Get Company</h1>
 		<input type="number" name="companyID" data-ng-model="companyID">
-		<input type="submit" data-ng-click= "getCompany(companyID)" value="Get company">
-		<table>
-			<tr><td>Company ID</td><td>{{company.companyID}}</td></tr>
-			<tr><td>Company Name</td><td>{{company.name}}</td></tr>
-			<tr><td>Company Address</td><td> </td></tr>
-			<tr><td>No</td><td> {{company.address.no}}</td></tr>
-			<tr><td>Street</td><td> {{company.address.street}}</td></tr>
-			<tr><td>City</td><td> {{company.address.city}}</td></tr>
-			<tr><td>Country</td><td> {{company.address.country}}</td></tr>
-			<tr><td>Postal Code</td><td> {{company.address.zipCode}}</td></tr>
-			<tr><td>Email</td><td> {{company.email}}</td></tr>
-			<tr><td>Phone Numbers</td><td> {{company.phoneNumber}}</td></tr>
-			<tr><td>Owner</td><td> {{company.owners}}</td></tr>
+		<button type="submit" class="btn btn-success"
+			data-ng-click="getCompany(companyID)">Get company</button>
+
+		<table class="table table-bordred table-striped">
+			<tr>
+				<td>Company ID</td>
+				<td>{{company.companyID}}</td>
+			</tr>
+			<tr>
+				<td>Company Name</td>
+				<td>{{company.name}}</td>
+			</tr>
+			<tr>
+				<td>Company Address</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>No</td>
+				<td>{{company.address.no}}</td>
+			</tr>
+			<tr>
+				<td>Street</td>
+				<td>{{company.address.street}}</td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td>{{company.address.city}}</td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td>{{company.address.country}}</td>
+			</tr>
+			<tr>
+				<td>Postal Code</td>
+				<td>{{company.address.zipCode}}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{company.email}}</td>
+			</tr>
+			<tr>
+				<td>Phone Numbers</td>
+				<td>{{company.phoneNumber}}</td>
+			</tr>
+			<tr>
+				<td>Owner</td>
+				<td>{{company.owners}}</td>
+			</tr>
 		</table>
-		<br>			
-	<br/>
-	LIST ALL COMPANIES:- 
-	<br>
-	<br/>	
-		<div data-ng-repeat="c in allCompanies">
-			<table>
-				<tr><td>Company ID</td><td>{{c.companyID}}</td></tr>
-				<tr><td>Company Name</td><td>{{c.name}}</td></tr>
-				<tr><td>Company Address</td><td> </td></tr>
-				<tr><td>No</td><td> {{c.address.no}}</td></tr>
-				<tr><td>Street</td><td> {{c.address.street}}</td></tr>
-				<tr><td>City</td><td> {{c.address.city}}</td></tr>
-				<tr><td>Country</td><td> {{c.address.country}}</td></tr>
-				<tr><td>Postal Code</td><td> {{c.address.zipCode}}</td></tr>
-				<tr><td>Email</td><td> {{c.email}}</td></tr>
-				<tr><td>Phone Numbers</td><td> {{c.phoneNumber}}</td></tr>
-				<tr><td>Owner</td><td> {{c.owners}}</td></tr>
+
+		<h1 class="thick-heading">All Companies</h1>
+
+		<div data-ng-repeat="c in allCompanies" class="table-responsive">
+			<table class="table table-bordred table-striped">
+				<thead>
+					<tr>
+						<th>Company ID</th>
+						<th>Company Name</th>
+						<th>Company Owner</th>
+						<th>Detail</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{c.companyID}}</td>
+						<td>{{c.name}}</td>
+						<td>{{c.owners}}</td>
+						<td>
+							<p data-placement="top" data-toggle="tooltip" title="Detail">
+								<button class="btn btn-info btn-xs" data-title="Detail"
+									data-toggle="modal" data-target="#detail">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</p>
+						</td>
+						<td>
+							<p data-placement="top" data-toggle="tooltip" title="Edit">
+								<button class="btn btn-primary btn-xs" data-title="Edit"
+									data-toggle="modal" data-target="#edit">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</button>
+							</p>
+						</td>
+						<td>
+							<p data-placement="top" data-toggle="tooltip" title="Delete">
+								<button class="btn btn-danger btn-xs" data-title="Delete"
+									data-toggle="modal" data-target="#delete">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</p>
+						</td>
+
+					</tr>
+				</tbody>
 			</table>
+			<div class="clearfix"></div>
+			<ul class="pagination pull-right">
+				<li class="disabled"><a href="#"><span
+						class="glyphicon glyphicon-chevron-left"></span></a></li>
+				<li class="active"><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#"><span
+						class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</ul>
+
 			<br>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>
