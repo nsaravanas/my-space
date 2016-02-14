@@ -8,9 +8,9 @@ public interface CompanyController {
 
 	List<Company> listAllCompanies();
 
-	boolean createCompany(Company company);
+	Company createCompany(Company company);
 
-	boolean updateCompany(Integer companyId, Company company);
+	Company updateCompany(Integer companyId, Company company);
 
 	Company getCompany(Integer companyId);
 

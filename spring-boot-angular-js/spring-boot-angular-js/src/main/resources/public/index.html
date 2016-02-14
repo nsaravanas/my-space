@@ -14,26 +14,46 @@
 	<div data-ng-controller="companyController as cc">	
 		<form name="createCompany" novalidate >
 			<table>
-				<tr><td>Company ID</td><td><input type="text" data-ng-model="c.companyID" name="companyID" required/></td></tr>
-				<tr><td>Company Name</td><td><input type="text" data-ng-model="c.name" name="name" required/></td></tr>
+				<tr><td>Company ID</td><td><input type="number" data-ng-model="newCompany.companyID" name="companyID" required/></td></tr>
+				<tr><td>Company Name</td><td><input type="text" data-ng-model="newCompany.name" name="name" required/></td></tr>
 				<tr><td>Company Address</td><td> </td></tr>
-				<tr><td>No</td><td> <input type="text" data-ng-model="c.address.no" name="address_no" required/></td></tr>
-				<tr><td>Street</td><td> <input type="text" data-ng-model="c.address.street" name="address_street" required/></td></tr>
-				<tr><td>City</td><td> <input type="text" data-ng-model="c.address.city" name="address_city" required/></td></tr>
-				<tr><td>Country</td><td> <input type="text" data-ng-model="c.address.country" name="address_country" required/></td></tr>
-				<tr><td>Postal Code</td><td> <input type="text" data-ng-model="c.address.zipCode" name="address_zipCode" required/></td></tr>
-				<tr><td>Email</td><td> <input type="text" data-ng-model="c.email" name="email" required/></td></tr>
-				<tr><td>Phone Numbers</td><td> <input type="text" data-ng-model="c.phoneNumber" name="phoneNumber" required/></td></tr>
-				<tr><td>Owner</td><td> <input type="text" data-ng-model="c.owners" name="owners" required/></td></tr>
-				<tr><td><input type="button" data-ng-click="reset()" value="Reset"></td><td><input type="submit" data-ng-click="save(user)" value="Save"></td></tr>
+				<tr><td>No</td><td> <input type="text" data-ng-model="newCompany.address.no" name="address_no" required/></td></tr>
+				<tr><td>Street</td><td> <input type="text" data-ng-model="newCompany.address.street" name="address_street" required/></td></tr>
+				<tr><td>City</td><td> <input type="text" data-ng-model="newCompany.address.city" name="address_city" required/></td></tr>
+				<tr><td>Country</td><td> <input type="text" data-ng-model="newCompany.address.country" name="address_country" required/></td></tr>
+				<tr><td>Postal Code</td><td> <input type="number" data-ng-model="newCompany.address.zipCode" name="address_zipCode" required/></td></tr>
+				<tr><td>Email</td><td> <input type="email" data-ng-model="newCompany.email" name="email" data-ng-list required/></td></tr>
+				<tr><td>Phone Numbers</td><td> <input type="tel" data-ng-model="newCompany.phoneNumber" data-ng-list name="phoneNumber" required/></td></tr>
+				<tr><td>Owner</td><td> <input type="text" data-ng-model="newCompany.owners" data-ng-list name="owners" required/></td></tr>
+				<tr><td><input type="button" data-ng-click="reset()" value="Reset"></td><td><input type="submit" data-ng-click="save(newCompany)" value="Save"></td></tr>
 			</table>
 		</form>
 	<br/>
 	<br/>
+	GET COMPANY:- 
+	<br>
+	<br/>
+		<input type="number" name="companyID" data-ng-model="companyID">
+		<input type="submit" data-ng-click= "getCompany(companyID)" value="Get company">
+		<table>
+			<tr><td>Company ID</td><td>{{company.companyID}}</td></tr>
+			<tr><td>Company Name</td><td>{{company.name}}</td></tr>
+			<tr><td>Company Address</td><td> </td></tr>
+			<tr><td>No</td><td> {{company.address.no}}</td></tr>
+			<tr><td>Street</td><td> {{company.address.street}}</td></tr>
+			<tr><td>City</td><td> {{company.address.city}}</td></tr>
+			<tr><td>Country</td><td> {{company.address.country}}</td></tr>
+			<tr><td>Postal Code</td><td> {{company.address.zipCode}}</td></tr>
+			<tr><td>Email</td><td> {{company.email}}</td></tr>
+			<tr><td>Phone Numbers</td><td> {{company.phoneNumber}}</td></tr>
+			<tr><td>Owner</td><td> {{company.owners}}</td></tr>
+		</table>
+		<br>			
+	<br/>
 	LIST ALL COMPANIES:- 
 	<br>
 	<br/>	
-		<div data-ng-repeat="c in companies">
+		<div data-ng-repeat="c in allCompanies">
 			<table>
 				<tr><td>Company ID</td><td>{{c.companyID}}</td></tr>
 				<tr><td>Company Name</td><td>{{c.name}}</td></tr>

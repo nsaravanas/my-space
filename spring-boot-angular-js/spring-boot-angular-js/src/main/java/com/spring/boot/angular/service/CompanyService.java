@@ -8,9 +8,9 @@ public interface CompanyService {
 
 	List<Company> getAllCompanies();
 
-	boolean createCompany(Company company);
+	Company createCompany(Company company);
 
-	boolean updateCompany(Integer companyId, Company company);
+	Company updateCompany(Integer companyId, Company company);
 
 	Company getCompany(Integer companyId);
 

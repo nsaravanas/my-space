@@ -16,7 +16,7 @@ public class Company {
 
 	@NotNull
 	private String name;
-	
+
 	@NotNull
 	private Address address;
 

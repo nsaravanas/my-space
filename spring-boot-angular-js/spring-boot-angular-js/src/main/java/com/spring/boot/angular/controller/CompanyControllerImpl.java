@@ -22,7 +22,7 @@ public class CompanyControllerImpl implements CompanyController {
 
 	@Override
 	@RequestMapping(value = "/companies", method = RequestMethod.PUT)
-	public boolean createCompany(@RequestBody @Valid Company company) {
+	public Company createCompany(@RequestBody @Valid Company company) {
 		return this.companyService.createCompany(company);
 	}
 
@@ -34,7 +34,7 @@ public class CompanyControllerImpl implements CompanyController {
 
 	@Override
 	@RequestMapping(value = "/companies/{companyID}", method = RequestMethod.POST)
-	public boolean updateCompany(@PathVariable Integer companyID, @RequestBody Company company) {
+	public Company updateCompany(@PathVariable Integer companyID, @RequestBody Company company) {
 		return this.companyService.updateCompany(companyID, company);
 	}
 

@@ -20,15 +20,14 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public boolean createCompany(Company company) {
-		this.companyRepository.save(company);
-		return true;
+	public Company createCompany(Company company) {
+		return this.companyRepository.save(company);
 	}
 
 	@Override
-	public boolean updateCompany(Integer companyId, Company company) {
-		this.companyRepository.save(company);
-		return true;
+	public Company updateCompany(Integer companyId, Company company) {
+		return this.companyRepository.save(company);
+
 	}
 
 	@Override
