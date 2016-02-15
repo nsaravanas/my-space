@@ -14,81 +14,108 @@
 <body data-ng-app="company">
 	<div data-ng-controller="companyController as cc">
 		<h1 class="thick-heading">Create Company</h1>
-		<form class="form-inline" role="form" name="createCompany" novalidate>
+		<form class="form-horizontal" role="form" name="createCompany"
+			novalidate>
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Company ID</label> <input
-					class="form-control" type="number"
-					data-ng-model="newCompany.companyID" name="companyID" required
-					placeholder="Company ID" />
+				<label class="col-sm-2 control-label">Company ID</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="number"
+						data-ng-model="newCompany.companyID" name="companyID" required
+						placeholder="Company ID" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Company Name</label> <input
-					class="form-control" type="text" data-ng-model="newCompany.name"
-					name="name" required placeholder="Company Name" />
+				<label class="col-sm-2 control-label">Company Name</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.name" name="name" required
+						placeholder="Company Name" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">No</label> <input
-					class="form-control" type="text"
-					data-ng-model="newCompany.address.no" name="address_no" required
-					placeholder="Address Door No" />
+				<label class="col-sm-2 control-label">No</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.address.no" name="address_no" required
+						placeholder="Door No" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Street</label> <input
-					class="form-control" type="text"
-					data-ng-model="newCompany.address.street" name="address_street"
-					required placeholder="Street" />
+				<label class="col-sm-2 control-label">Street</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.address.street" name="address_street"
+						required placeholder="Street" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">City</label> <input
-					class="form-control" type="text"
-					data-ng-model="newCompany.address.city" name="address_city"
-					required placeholder="City" />
+				<label class="col-sm-2 control-label">City</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.address.city" name="address_city"
+						required placeholder="City" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Country</label> <input
-					class="form-control" type="text"
-					data-ng-model="newCompany.address.country" name="address_country"
-					required placeholder="Country" />
+				<label class="col-sm-2 control-label">Country</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.address.country" name="address_country"
+						required placeholder="Country" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Postal Code</label> <input
-					class="form-control" type="number"
-					data-ng-model="newCompany.address.zipCode" name="address_zipCode"
-					required placeholder="zip/postal code" />
+				<label class="col-sm-2 control-label">Postal Code</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="number"
+						data-ng-model="newCompany.address.zipCode" name="address_zipCode"
+						required placeholder="Postal code" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Email</label> <input
-					class="form-control" type="email" data-ng-model="newCompany.email"
-					name="email" required placeholder="Email ID" />
+				<label class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="email"
+						data-ng-model="newCompany.email" name="email" required
+						placeholder="Email ID" />
+				</div>
 			</div>
-			<br />
+ 
 			<div class="form-group">
-				<label class="sr-only" for="name">Phone Numbers</label> <input
-					class="form-control" type="tel"
-					data-ng-model="newCompany.phoneNumber" name="phoneNumber" required
-					placeholder="Phone Numbers, comma seperated" />
+				<label class="col-sm-2 control-label">Phone Number</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="tel"
+						data-ng-model="newCompany.phoneNumber" name="phoneNumber" required
+						placeholder="Phone Number" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<label class="sr-only" for="name">Owner</label> <input
-					class="form-control" type="text" data-ng-model="newCompany.owners"
-					data-ng-list name="owners" required
-					placeholder="Company Owners, comma seperated" />
+				<label class="col-sm-2 control-label">Owner</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text"
+						data-ng-model="newCompany.owners" data-ng-list name="owners"
+						required placeholder="Company Owners, comma seperated" />
+				</div>
 			</div>
-			<br />
+
 			<div class="form-group">
-				<button type="reset" class="btn btn-warning" data-ng-click="reset()">Reset</button>
-				<button type="submit" class="btn btn-success"
-					data-ng-click="save(newCompany)">Save</button>
+				<div class="col-sm-4" align="right">
+					<button type="reset" class="btn btn-warning"
+						data-ng-click="reset()">Reset</button>
+					<button type="submit" class="btn btn-success"
+						data-ng-click="save(newCompany)">Save</button>
+				</div>
 			</div>
-			<br />
+
 		</form>
 
 
