@@ -12,7 +12,7 @@ public class Company {
 
 	@Id
 	@NotNull
-	private int companyID;
+	private Integer companyID;
 
 	@NotNull
 	private String name;
@@ -22,7 +22,7 @@ public class Company {
 
 	private String email;
 
-	private String phoneNumber;
+	private Integer phoneNumber;
 
 	@NotNull
 	private List<String> owners;
@@ -31,7 +31,8 @@ public class Company {
 		super();
 	}
 
-	public Company(int companyID, String name, Address address, String email, String phoneNumber, List<String> owners) {
+	public Company(Integer companyID, String name, Address address, String email, Integer phoneNumber,
+			List<String> owners) {
 		super();
 		this.companyID = companyID;
 		this.name = name;
@@ -41,11 +42,11 @@ public class Company {
 		this.owners = owners;
 	}
 
-	public int getCompanyID() {
+	public Integer getCompanyID() {
 		return companyID;
 	}
 
-	public void setCompanyID(int companyID) {
+	public void setCompanyID(Integer companyID) {
 		this.companyID = companyID;
 	}
 
@@ -73,11 +74,11 @@ public class Company {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
+	public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
+	public void setPhoneNumber(Integer phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

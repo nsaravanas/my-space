@@ -1,1 +1,1 @@
-var app = angular.module('company', ['ngMessages']);
+var app = angular.module('company', [ 'ngMessages' ]);

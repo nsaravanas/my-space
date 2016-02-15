@@ -48,7 +48,7 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">No</label>
+						<label class="col-sm-2 control-label">Number</label>
 						<div class="col-sm-4">
 							<input class="form-control" type="text"
 								data-ng-model="company.address.no" name="address_no" required
@@ -126,16 +126,16 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Phone Number</label>
+						<label class="col-sm-2 control-label">Phone number</label>
 						<div class="col-sm-4">
-							<input class="form-control" type="tel" data-ng-minlength="10"
-								data-ng-maxlength="10" data-ng-model="company.phoneNumber"
-								name="phoneNumber" required placeholder="Phone Number" />
+							<input class="form-control" type="number" min="1000000000"
+								max="9999999999" data-ng-model="company.phoneNumber"
+								name="phoneNumber" placeholder="Phone Number" />
 						</div>
 						<div data-ng-messages="companyForm.phoneNumber.$error"
 							data-ng-show="companyForm.phoneNumber.$touched">
-							<p data-ng-message="($error.minlength || $error.maxlength) ">phone
-								number should be 10 digits</p>
+							<p data-ng-message="min">Phone number should be 10 digits</p>
+							<p data-ng-message="max">Phone number should be 10 digits</p>
 						</div>
 					</div>
 
@@ -162,6 +162,7 @@
 								data-ng-click="reset()">Reset</button>
 							<button type="submit" class="btn btn-success"
 								data-ng-click="save(company)">Save/Update</button>
+							<!-- companyForm.$touched && companyForm.$valid &&  -->
 						</div>
 					</div>
 

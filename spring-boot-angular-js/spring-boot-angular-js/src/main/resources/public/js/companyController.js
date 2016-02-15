@@ -20,6 +20,10 @@ app.controller('companyController', [ '$scope', 'companyService',
 			};
 
 			$scope.save = function(company) {
+				console.log('Form start ************************');
+				console.log('Touched ' + $scope.companyForm.$touched);
+				console.log('Valid   ' + $scope.companyForm.$valid);
+				console.log('Form end ************************');
 				console.log('Controller JSON ' + JSON.stringify(company));
 				companyService.addCompany(company).then(function(dataResponse) {
 					$scope.company = dataResponse.data;
@@ -35,6 +39,8 @@ app.controller('companyController', [ '$scope', 'companyService',
 				companyService.getCompany(comId).then(function(dataResponse) {
 					$scope.company = dataResponse.data;
 					$scope.comId = '';
+					$scope.companyForm.$touched = true;
+					$scope.companyForm.$valid = true;
 				});
 			};
 
