@@ -50,5 +50,5 @@ Authentication:-
 
 	JSON Web Token authentication is the best approach which I will implement, rather than storing the user information in cookies it stores the user information in encrypted way, also it can be scalable, this method of authentication is used by Facebook & Twitter.
 	
-Service Redundancy:-
+Service Redundancy:- 
 	Have used Mongo DB as it is document based no SQL which can be horizontally scalable, high available and provides excellent support by the offical team .
