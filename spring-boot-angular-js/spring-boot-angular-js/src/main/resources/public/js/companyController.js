@@ -12,22 +12,14 @@ app.controller('companyController', [ '$scope', 'companyService',
 			$scope.company = {};
 
 			$scope.reset = function() {
-				console.log('Reset In');
 				$scope.companyForm.$setUntouched();
 				$scope.companyForm.$setPristine();
 				$scope.comId = '';
-				console.log('Reset Out');
 			};
 
 			$scope.save = function(company) {
-				console.log('Form start ************************');
-				console.log('Touched ' + $scope.companyForm.$touched);
-				console.log('Valid   ' + $scope.companyForm.$valid);
-				console.log('Form end ************************');
-				console.log('Controller JSON ' + JSON.stringify(company));
 				companyService.addCompany(company).then(function(dataResponse) {
 					$scope.company = dataResponse.data;
-					console.log('Company added.')
 					$scope.company = {};
 					$scope.companyForm.$setUntouched();
 					$scope.companyForm.$setPristine();

@@ -34,7 +34,7 @@ public class CompanyControllerImpl implements CompanyController {
 
 	@Override
 	@RequestMapping(value = "/companies/{companyID}", method = RequestMethod.POST)
-	public Company updateCompany(@PathVariable Integer companyID, @RequestBody Company company) {
+	public Company updateCompany(@PathVariable Integer companyID, @Valid @RequestBody Company company) {
 		return this.companyService.updateCompany(companyID, company);
 	}
 
