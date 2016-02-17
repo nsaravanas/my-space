@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>spring-boot</groupId>
-	<artifactId>angular-spring-boot</artifactId>
+	<artifactId>spring-boot-angular-js</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>angular-spring-boot</name>
+	<name>spring-boot-angular-js</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>
