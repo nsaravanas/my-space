@@ -27,18 +27,18 @@ Sample JSON
 REST APIs
 =========
 	
-	GET
-	---
+	: GET
+	
 		/companies
 	returns List<Company>
 	
-	POST
-	----
+	: POST
+	
 		/companies/{companyID}
 	returns Company
 	
-	GET
-	---
+	: GET
+	
 		/companies/{companyID}
 	returns Company
 
