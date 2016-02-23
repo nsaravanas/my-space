@@ -1,13 +1,11 @@
-GitHub repository
-================
+###GitHub repository
+
 	https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js
 	
-Heroku URL
-==========
+###Heroku URL
 	https://limitless-journey-45430.herokuapp.com/	
 	
-Sample JSON
-===========
+###Sample JSON
 
 {
 	"companyID":3,
@@ -24,37 +22,33 @@ Sample JSON
 	"owners":["Tata","GRD"]
 }
 
-REST APIs
-=========
+###REST APIs
 	
-	: GET
+GET
 	
-		/companies
-	returns List<Company>
+: 1	/companies
+: 2		returns List<Company>
 	
-	: POST
+POST
 	
-		/companies/{companyID}
-	returns Company
+: 1	/companies/{companyID}
+: 2		returns Company
 	
-	: GET
+GET
 	
-		/companies/{companyID}
-	returns Company
+: 1 /companies/{companyID}
+: 2		returns Company
 
-Technologies Used
-=================
+###Technologies Used
 
 	Java 8
 	Spring Boot [Thymeleaf, REST, JPA]
 	Mongo DB
 	Angular JS
 	
-Authentication
-==============
+###Authentication
 
 	JSON Web Token authentication is the best approach which I will implement, rather than storing the user information in cookies it stores the user information in encrypted way, also it can be scalable, this method of authentication is used by Facebook & Twitter.
 	
-Service Redundancy
-==================
+###Service Redundancy
 	Have used Mongo DB as it is document based no SQL which can be horizontally scalable, high available and provides excellent support by the offical team .
