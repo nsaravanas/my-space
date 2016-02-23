@@ -28,15 +28,18 @@ This documentation provides the brief description about the appilcation, technol
 	
 > GET
 	
-> - /companies returns List of Company
+	/companies 
+	returns List<Company>
 	
 > POST
 	
-> - /companies/{companyID} returns Company
+	/companies/{companyID}
+	returns Company
 	
 > GET
 	
-> - /companies/{companyID} returns Company
+	/companies/{companyID}
+	returns Company
 
 ###Technologies Used
 
