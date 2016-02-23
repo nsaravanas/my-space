@@ -26,18 +26,18 @@
 	
 GET
 	
-: 1	/companies
-: 2		returns List<Company>
+/companies
+returns List<Company>
 	
 POST
 	
-: 1	/companies/{companyID}
-: 2		returns Company
+/companies/{companyID}
+returns Company
 	
 GET
 	
-: 1 /companies/{companyID}
-: 2		returns Company
+/companies/{companyID}
+returns Company
 
 ###Technologies Used
 
