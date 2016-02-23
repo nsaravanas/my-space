@@ -3,10 +3,10 @@ This documentation provides the brief description about the appilcation, technol
 In this application you can add/update/get and getall companies and details
 
 ###GitHub repository
-	[GitHub Link][1]
+[GitHub Link][1]
 	
 ###Heroku URL
-	[Heroku Link][2]	
+[Heroku Link][2]	
 	
 ###Sample JSON
 
