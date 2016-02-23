@@ -3,12 +3,10 @@ This documentation provides the brief description about the appilcation, technol
 In this application you can add/update/get and getall companies and details
 
 ###GitHub repository
-	[github_link][1]:
-	https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js
+	[^github_link]:[github_link](https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js)
 	
 ###Heroku URL
-	[heroku_link][2]:
-	https://limitless-journey-45430.herokuapp.com/	
+	[^heroku_link]:[heroku_link](https://limitless-journey-45430.herokuapp.com/)	
 	
 ###Sample JSON
 
@@ -56,5 +54,5 @@ In this application you can add/update/get and getall companies and details
 ###Service Redundancy
 	Have used Mongo DB as it is document based no SQL which can be horizontally scalable, high available and provides excellent support by the offical team .
 
-[1]:https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js
-[2]:https://limitless-journey-45430.herokuapp.com/	
+  [1]:https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js
+  [2]:https://limitless-journey-45430.herokuapp.com/	
