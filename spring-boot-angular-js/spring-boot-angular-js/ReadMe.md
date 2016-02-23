@@ -42,7 +42,7 @@ In this application you can add/update/get and getall companies and details
 	/companies/{companyID}
 	returns Company
 
-###cURL examples
+###cURL
 
 > GET all companies
 
