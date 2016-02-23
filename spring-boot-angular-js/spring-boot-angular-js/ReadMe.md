@@ -32,7 +32,7 @@ In this application you can add/update/get and getall companies and details
 	/companies 
 	returns List<Company>
 	
-> POST
+> PUT
 	
 	/companies/{companyID}
 	returns Company
@@ -41,6 +41,17 @@ In this application you can add/update/get and getall companies and details
 	
 	/companies/{companyID}
 	returns Company
+
+###cURL examples
+
+> GET all companies
+	curl https://limitless-journey-45430.herokuapp.com/companies/ -X GET
+
+> GET a company
+	curl https://limitless-journey-45430.herokuapp.com/companies/{companyID} -X GET
+
+> Save/Update a company
+	curl https://limitless-journey-45430.herokuapp.com/companies/ -X PUT -d '{"companyID":7,"name":"TCS","address":{"no":"123",""Chennai","country":"India","zipCode":600026},"email":"some@tcs.in","phoneNumber":1234567890,"owners":["Tata","GRD"]}' -H 'Content-Type:application/json'
 
 ###Technologies Used
 1.	Java 8
