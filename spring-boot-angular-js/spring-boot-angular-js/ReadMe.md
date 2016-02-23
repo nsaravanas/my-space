@@ -1,3 +1,5 @@
+This documentation provides the brief description about the appilcation, technologies, REST APIs to be used
+
 ###GitHub repository
 
 	https://github.com/nsaravanas/ubuntu-eclipse/tree/master/spring-boot-angular-js/spring-boot-angular-js
@@ -7,7 +9,7 @@
 	
 ###Sample JSON
 
-{
+`{
 	"companyID":3,
 	"name":"TCS",
 	"address":{
@@ -20,13 +22,13 @@
 	"email":"some@tcs.in",
 	"phoneNumber":1234567890,
 	"owners":["Tata","GRD"]
-}
+}`
 
 ###REST APIs
 	
 > GET
 	
-> - /companies returns List<Company>
+> - /companies returns List of Company
 	
 > POST
 	
