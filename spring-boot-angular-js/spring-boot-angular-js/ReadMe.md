@@ -43,10 +43,10 @@ In this application you can add/update/get and getall companies and details
 	returns Company
 
 ###Technologies Used
-	Java 8
-	Spring Boot [Thymeleaf, REST, JPA]
-	Mongo DB
-	Angular JS
+1. Java 8
+2. Spring Boot 1.3.0 [Thymeleaf, REST, JPA]
+3. Mongo DB 3.0.9 Database-as-a-service
+4. Angular JS 1.4.5
 	
 ###Authentication
 	JSON Web Token authentication is the best approach which I will implement, rather than storing the user information in cookies it stores the user information in encrypted way, also it can be scalable, this method of authentication is used by Facebook & Twitter.
