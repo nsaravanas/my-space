@@ -9,20 +9,20 @@ This documentation provides the brief description about the appilcation, technol
 	
 ###Sample JSON
 
-`{
-	"companyID":3,
-	"name":"TCS",
-	"address":{
-		"no":"123",
-		"street":"Rajiv",
-		"city":"Chennai",
-		"country":"India",
-		"zipCode":600026
-	},
-	"email":"some@tcs.in",
-	"phoneNumber":1234567890,
-	"owners":["Tata","GRD"]
-}`
+	{
+		"companyID":3,
+		"name":"TCS",
+		"address":{
+			"no":"123",
+			"street":"Rajiv",
+			"city":"Chennai",
+			"country":"India",
+			"zipCode":600026
+		},
+		"email":"some@tcs.in",
+		"phoneNumber":1234567890,
+		"owners":["Tata","GRD"]
+	}
 
 ###REST APIs
 	
