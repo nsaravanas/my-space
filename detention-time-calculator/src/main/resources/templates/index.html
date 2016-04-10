@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<title>Detention Time Calculator</title>
+</head>
+<body>
+	<h1>Under Construction</h1>
+
+	<form id="userDetail" action="#" th:action="@{/}" th:object="${student}" method="post">
+		Student id     : <input id="studentId" th:field="{studentId}" type="number" required><br/>
+		Student name   : <input id="name" th:field="name"  type="{text}" required><br/>
+		Offenses       : <input id="offenses" th:field="{studentDetail.offenses}"  type="text" required><br/>
+		Detention Type : <input id="detentionType" th:field="{studentDetail.detentionType}"  type="text" required><br/>
+		Time           : <input id="time" th:field="{studentDetail.time}"  type="text" required><br/>
+		<button type="submit">Calculate Detention Time</button>
+	</form>
+
+</body>
+</html>
