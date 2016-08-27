@@ -35,7 +35,7 @@ public class SearchService {
 		String queryString = SearchEngineOptimization.getQueryString(queryList);
 
 		// From cache
-		if (search.isCacheOk()) {
+		if (search.isCache()) {
 			List<Page> cacheResult = engineOptimization.getCache().get(queryString);
 			if (cacheResult != null && !cacheResult.isEmpty()) {
 				return cacheResult;
@@ -43,7 +43,7 @@ public class SearchService {
 		}
 
 		// From historic searches
-		if (search.isIndexOk()) {
+		if (search.isIndex()) {
 			QueryResult queryResult = this.resultRepository.findOne(queryString);
 			if (queryResult != null) {
 				List<Page> queryPages = this.pageRepository.findAll(queryResult.getPageNames());
