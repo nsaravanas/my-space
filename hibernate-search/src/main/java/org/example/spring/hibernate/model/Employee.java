@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 import org.hibernate.search.annotations.DateBridge;
 import org.hibernate.search.annotations.Field;
@@ -18,7 +20,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.NumericField;
 import org.hibernate.search.annotations.Resolution;
 
-@Entity
+@Entity(name = "employee")
 @Indexed
 public class Employee {
 
@@ -47,6 +49,18 @@ public class Employee {
 	@IndexedEmbedded
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Address> addresses;
+
+	@ElementCollection
+	// @OrderColumn
+	private List<String> hobbies;
+
+	public List<String> getHobbies() {
+		return hobbies;
+	}
+
+	public void setHobbies(List<String> hobbies) {
+		this.hobbies = hobbies;
+	}
 
 	public Integer getId() {
 		return id;

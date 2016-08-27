@@ -2,10 +2,12 @@ package org.example.spring.hibernate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 import org.apache.lucene.search.Query;
 import org.example.spring.hibernate.model.Address;
@@ -22,8 +24,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBoot implements CommandLineRunner {
 
+	// @Autowired
+	// private EntityManagerFactory factory;
+
 	@Autowired
-	private EntityManagerFactory factory;
+	DataSource dataSource;
 
 	@Autowired
 	private EmployeeRepository repository;
@@ -34,16 +39,22 @@ public class SpringBoot implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg) throws Exception {
+		System.out.println(dataSource);
 		Employee e1 = createEmployee1();
 		Employee e2 = createEmployee2();
 		List<Employee> employees = new ArrayList<Employee>();
 		employees.add(e1);
 		employees.add(e2);
+		// this.factory.createEntityManager().persist(e1);
+		// this.factory.createEntityManager().persist(e2);
 		List<Employee> e = this.repository.save(employees);
 		System.out.println(e);
 		System.err.println("Begin Hibernate Search...");
-		hibernateSearch();
+		// hibernateSearch();
 		System.err.println("End Hibernate Search...");
+		System.out.println(this.repository.findByHobbiesIn(Arrays.asList("reading")));
+
+		System.out.println("waiting...");
 	}
 
 	private Employee createEmployee2() {
@@ -52,6 +63,7 @@ public class SpringBoot implements CommandLineRunner {
 		e.setAge(26);
 		e.setFirstName("Saravana");
 		e.setLastName("N");
+		e.setHobbies(Arrays.asList("reading", "sleeping"));
 		e.setSince(LocalDate.now());
 
 		Address a1 = new Address();
@@ -78,6 +90,7 @@ public class SpringBoot implements CommandLineRunner {
 
 	private Employee createEmployee1() {
 		Employee e = new Employee();
+		e.setHobbies(Arrays.asList("reading"));
 		e.setAge(26);
 		e.setFirstName("Saravanakumar");
 		e.setLastName("Nagarajan");
@@ -105,16 +118,21 @@ public class SpringBoot implements CommandLineRunner {
 		return e;
 	}
 
-	private void hibernateSearch() {
-		EntityManager entityManager = factory.createEntityManager();
-		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
-		entityManager.getTransaction().begin();
-		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Employee.class).get();
-		Query luceneQuery = queryBuilder.keyword().onFields("firstName", "lastName", "addresses.street").matching("broad").createQuery();
-		javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Employee.class);
-		List result = jpaQuery.getResultList();
-		System.out.println(result);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
+	// private void hibernateSearch() {
+	// EntityManager entityManager = factory.createEntityManager();
+	// FullTextEntityManager fullTextEntityManager =
+	// Search.getFullTextEntityManager(entityManager);
+	// entityManager.getTransaction().begin();
+	// QueryBuilder queryBuilder =
+	// fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Employee.class).get();
+	// Query luceneQuery = queryBuilder.keyword().onFields("firstName",
+	// "lastName", "addresses.street").matching("Singapore").createQuery();
+	// javax.persistence.Query jpaQuery =
+	// fullTextEntityManager.createFullTextQuery(luceneQuery, Employee.class);
+	// @SuppressWarnings("unchecked")
+	// List<Employee> result = jpaQuery.getResultList();
+	// System.out.println(result);
+	// entityManager.getTransaction().commit();
+	// entityManager.close();
+	// }
 }
