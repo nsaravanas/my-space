@@ -2,9 +2,9 @@ package org.example.model.search;
 
 public class Search {
 
-	private boolean cache;
+	private boolean isCacheOk = true;
 
-	private boolean index;
+	private boolean isIndexOk = true;
 
 	private String[] tags;
 
@@ -16,19 +16,20 @@ public class Search {
 		this.tags = tags;
 	}
 
-	public void setCache(boolean cache) {
-		this.cache = cache;
+	public boolean isCacheOk() {
+		return isCacheOk;
 	}
 
-	public void setIndex(boolean index) {
-		this.index = index;
+	public void setCacheOk(boolean isCacheOk) {
+		this.isCacheOk = isCacheOk;
 	}
 
-	public boolean isCache() {
-		return cache;
+	public boolean isIndexOk() {
+		return isIndexOk;
 	}
 
-	public boolean isIndex() {
-		return index;
+	public void setIndexOk(boolean isIndexOk) {
+		this.isIndexOk = isIndexOk;
 	}
+
 }
