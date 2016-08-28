@@ -21,6 +21,14 @@ public class SearchEngine {
 	@Autowired
 	private SearchEngineOptimization engineOptimization;
 
+	public SearchEngineOptimization getEngineOptimization() {
+		return engineOptimization;
+	}
+
+	public void setEngineOptimization(SearchEngineOptimization engineOptimization) {
+		this.engineOptimization = engineOptimization;
+	}
+
 	public Map<String, List<Page>> indexing(List<Page> pages, List<List<String>> queries) {
 		Map<String, List<Page>> indexed = new LinkedHashMap<>();
 		for (List<String> queryTags : queries) {

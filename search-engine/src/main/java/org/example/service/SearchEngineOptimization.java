@@ -21,11 +21,8 @@ public class SearchEngineOptimization {
 	}
 
 	public void addToCache(String queryString, List<Page> matchedPages) {
-		if (CACHE.size() >= cacheSize) { // remove old cached items
-
-		} else {
-			CACHE.put(queryString, matchedPages);
-		}
+		// TODO remove old cached items
+		CACHE.put(queryString, matchedPages);
 	}
 
 }
