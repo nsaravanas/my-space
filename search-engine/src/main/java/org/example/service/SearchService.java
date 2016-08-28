@@ -75,8 +75,8 @@ public class SearchService {
 		return this.pageRepository.save(pages);
 	}
 
-	public boolean delete(List<Page> pages) {
-		this.pageRepository.delete(pages);
+	public boolean delete(List<String> pages) {
+		this.pageRepository.delete(this.pageRepository.findAll(pages));
 		return true;
 	}
 

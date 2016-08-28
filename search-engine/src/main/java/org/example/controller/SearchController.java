@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,6 @@ import org.example.model.SearchResponse;
 import org.example.model.search.SearchGetRequest;
 import org.example.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +27,8 @@ public class SearchController {
 	@Autowired
 	private SearchService searchService;
 
-	@RequestMapping("/")
-	public ResponseEntity<SearchResponse> search(@RequestBody SearchGetRequest searchRequest) {
+	@RequestMapping("/search")
+	public SearchResponse search(@RequestBody SearchGetRequest searchRequest) {
 		long start = System.nanoTime();
 		List<Page> searchPages = this.searchService.search(searchRequest.getSearch());
 		long end = System.nanoTime();
@@ -41,27 +40,27 @@ public class SearchController {
 		response.setPages(searchPages);
 		response.setHeader(header);
 		searchResponse.setResponse(response);
-		return new ResponseEntity<SearchResponse>(searchResponse, HttpStatus.OK);
+		return searchResponse;
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<Map<String, List<String>>> save(@RequestBody List<Page> pages) {
+	public Map<String, List<String>> save(@RequestBody List<Page> pages) {
 		List<Page> savedPages = this.searchService.save(pages);
 		Map<String, List<String>> result = new HashMap<>();
 		result.put("saved_pages", savedPages.stream().map(Page::getName).collect(toList()));
-		return new ResponseEntity<Map<String, List<String>>>(result, HttpStatus.OK);
+		return result;
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public ResponseEntity<Map<String, Boolean>> delete(@RequestBody List<Page> pages) {
-		boolean bool = this.searchService.delete(pages);
+	public Map<String, Boolean> delete(@RequestBody List<String> pageNames) {
+		boolean bool = this.searchService.delete(pageNames);
 		Map<String, Boolean> result = new HashMap<>();
 		result.put("delete_success", bool);
-		return new ResponseEntity<Map<String, Boolean>>(result, HttpStatus.OK);
+		return result;
 	}
 
-	@RequestMapping("/get")
-	public List<Page> getall() {
+	@RequestMapping(value = "/initialize", method = RequestMethod.GET)
+	public Map<String, Object> initialize() {
 		Page page1 = new Page();
 		page1.setName("P1");
 		page1.setTags(Arrays.asList("Ford", "Car", "Review"));
@@ -95,8 +94,11 @@ public class SearchController {
 		for (String[] query : queries) {
 			queriesList.add(Arrays.asList(query));
 		}
-
 		List<Page> pages = Arrays.asList(page1, page2, page3, page4, page5, page6);
-		return pages;
+		List<Page> savedPages = this.searchService.save(pages);
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put("initialize", "ok");
+		result.put("pages", savedPages);
+		return result;
 	}
 }
