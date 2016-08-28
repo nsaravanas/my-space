@@ -9,10 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.example.model.Header;
 import org.example.model.Page;
-import org.example.model.Response;
-import org.example.model.SearchResponse;
 import org.example.model.search.SearchGetRequest;
 import org.example.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +24,16 @@ public class SearchController {
 	@Autowired
 	private SearchService searchService;
 
-	@RequestMapping("/search")
-	public SearchResponse search(@RequestBody SearchGetRequest searchRequest) {
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public Map<String, Object> search(@RequestBody SearchGetRequest searchRequest) {
 		long start = System.nanoTime();
 		List<Page> searchPages = this.searchService.search(searchRequest.getSearch());
 		long end = System.nanoTime();
-		SearchResponse searchResponse = new SearchResponse();
-		Response response = new Response();
-		Header header = new Header();
+		Map<String, Object> result = new LinkedHashMap<>();
 		double timeTaken = (end - start) / (1000 * 1000);
-		header.setTimeTaken(timeTaken);
-		response.setPages(searchPages);
-		response.setHeader(header);
-		searchResponse.setResponse(response);
-		return searchResponse;
+		result.put("timeTaken_in_mills", timeTaken);
+		result.put("pages", searchPages);
+		return result;
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -59,7 +52,12 @@ public class SearchController {
 		return result;
 	}
 
-	@RequestMapping(value = "/initialize", method = RequestMethod.GET)
+	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+	public List<Page> selectAll() {
+		return this.searchService.getAll();
+	}
+
+	@RequestMapping(value = "/initialize")
 	public Map<String, Object> initialize() {
 		Page page1 = new Page();
 		page1.setName("P1");

@@ -90,4 +90,8 @@ public class SearchService {
 		}
 	}
 
+	public List<Page> getAll() {
+		return this.pageRepository.findAll();
+	}
+
 }
