@@ -1,27 +1,31 @@
 package org.example.service;
 
 import static java.util.Arrays.asList;
-import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
 import org.example.model.Page;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class SearchEngineTest {
+
+	@Value("${max.weight}")
+	private int maxWeight;
 
 	@Autowired
 	private SearchEngine searchEngine;
 
-	@Before
-	public void initialize() {
+	@Test
+	public void testIndexing() {
 		Page page1 = new Page();
 		page1.setName("P1");
 		page1.setTags(asList("Ford", "Car", "Review"));
@@ -51,13 +55,28 @@ public class SearchEngineTest {
 		page7.setTags(asList("Car", "Ford"));
 
 		String[][] queries = { { "Ford" }, { "Car" }, { "Review" }, { "Ford", "Review" }, { "Ford", "Car" }, { "cooking", "French" } };
-		List<List<String>> queriesList = stream(queries).map(query -> stream(query).collect(toList())).collect(toList());
+
+		String[][] expecteds = { { "P1", "P3" }, { "P6", "P1", "P2", "P4", "P5" }, { "P2", "P3", "P1" }, { "P3", "P1", "P2" },
+				{ "P1", "P3", "P6", "P2", "P4", "P5" }, {} };
+
 		List<Page> pages = asList(page1, page2, page3, page4, page5, page6);
-		this.searchEngine.indexing(pages, queriesList);
+
+		for (int i = 0; i < queries.length; i++) {
+			String[] actual = this.searchEngine.indexing(pages, queries[i]).stream().map(Page::getName).toArray(String[]::new);
+			String[] expected = expecteds[i];
+			Assert.assertNotNull(actual);
+			Assert.assertArrayEquals(expected, actual);
+		}
 	}
 
 	@Test
-	public void testOne() {
+	public void testWeightCalculation() {
+		Assert.assertEquals(113, this.searchEngine.calculateWeight(asList("Ford", "Car", "Review"), asList("Ford", "Car")));
+		Assert.assertEquals(49, this.searchEngine.calculateWeight(asList("Toyota", "Car"), asList("Ford", "Car")));
+		Assert.assertEquals(112, this.searchEngine.calculateWeight(asList("Car", "Ford"), asList("Ford", "Car")));
+		Assert.assertEquals(106, this.searchEngine.calculateWeight(asList("Ford", "Car", "Review"), asList("Ford", "Review")));
+		Assert.assertEquals(0, this.searchEngine.calculateWeight(asList("Toyota", "Car"), asList("Ford", "Review")));
+		Assert.assertEquals(56, this.searchEngine.calculateWeight(asList("Car", "Ford"), asList("Ford", "Review")));
 	}
 
 	@After

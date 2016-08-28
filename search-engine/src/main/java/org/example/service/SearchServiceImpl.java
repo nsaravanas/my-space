@@ -1,10 +1,11 @@
 package org.example.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -40,7 +41,7 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Page> search(Search search) {
 
-		List<String> queryList = Arrays.asList(search.getTags()).stream().map(String::toLowerCase).collect(Collectors.toList());
+		List<String> queryList = Arrays.asList(search.getTags()).stream().map(String::toLowerCase).collect(toList());
 		String queryString = SearchEngineImpl.getQueryString(queryList);
 
 		// From cache
@@ -69,7 +70,7 @@ public class SearchServiceImpl implements SearchService {
 		// Persist to DB
 		QueryResult result = new QueryResult();
 		result.setQuery(queryString);
-		result.setPageNames(indexedPages.stream().map(Page::getName).collect(Collectors.toList()));
+		result.setPageNames(indexedPages.stream().map(Page::getName).collect(toList()));
 		resultRepository.save(result);
 
 		return indexedPages;
@@ -78,7 +79,7 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Page> save(List<Page> pages) {
 		for (Page page : pages) {
-			page.setTags(page.getTags().stream().map(String::toLowerCase).collect(Collectors.toList()));
+			page.setTags(page.getTags().stream().map(String::toLowerCase).collect(toList()));
 		}
 		return this.pageRepository.save(pages);
 	}
@@ -94,7 +95,7 @@ public class SearchServiceImpl implements SearchService {
 	public void reIndex() {
 		List<QueryResult> queryResults = this.resultRepository.findAll();
 		for (QueryResult queryResult : queryResults) {
-			List<String> tags = Arrays.stream(queryResult.getQuery().split("_")).collect(Collectors.toList());
+			List<String> tags = Arrays.stream(queryResult.getQuery().split("_")).collect(toList());
 			List<Page> pages = this.pageRepository.findAll(queryResult.getPageNames());
 			this.searchEngine.indexing(pages, tags, queryResult.getQuery());
 		}

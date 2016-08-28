@@ -17,4 +17,6 @@ public interface SearchEngine {
 
 	SearchEngineOptimization getEngineOptimization();
 
+	List<Page> indexing(List<Page> pages, String[] query);
+
 }

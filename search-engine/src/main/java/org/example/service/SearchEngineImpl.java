@@ -1,12 +1,15 @@
 package org.example.service;
 
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.example.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,11 @@ public class SearchEngineImpl implements SearchEngine {
 	}
 
 	@Override
+	public List<Page> indexing(List<Page> pages, String[] query) {
+		return indexing(pages, Arrays.asList(query), SearchEngineImpl.getQueryString(query));
+	}
+
+	@Override
 	public List<Page> indexing(List<Page> pages, List<String> query, String queryString) {
 		List<Page> matchedPages = new ArrayList<>();
 		for (Page page : pages) {
@@ -61,6 +69,15 @@ public class SearchEngineImpl implements SearchEngine {
 
 	@Override
 	public int calculateWeight(List<String> queryTags, List<String> pageTags) {
+		final AtomicInteger ai = new AtomicInteger(maxWeight);
+		Map<String, Integer> queryMap = queryTags.stream().distinct().limit(maxWeight).collect(toMap(tag -> tag, value -> ai.getAndDecrement()));
+		ai.set(maxWeight);
+		Map<String, Integer> pageMap = pageTags.stream().distinct().limit(maxWeight).collect(toMap(tag -> tag, value -> ai.getAndDecrement()));
+		return queryMap.keySet().stream().filter(pageMap::containsKey).mapToInt(key -> queryMap.get(key) * pageMap.get(key)).sum();
+	}
+
+	@Deprecated
+	public int calculate(List<String> queryTags, List<String> pageTags) {
 		int weight = 0;
 		int queryWeight = maxWeight;
 		for (String queryTag : queryTags) {
@@ -78,5 +95,9 @@ public class SearchEngineImpl implements SearchEngine {
 
 	public static String getQueryString(List<String> queryList) {
 		return queryList.stream().collect(joining("_")).toLowerCase();
+	}
+
+	public static String getQueryString(String[] queryList) {
+		return getQueryString(Arrays.asList(queryList));
 	}
 }
