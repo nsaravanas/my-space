@@ -2,8 +2,6 @@ package org.example.controller;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -70,41 +68,7 @@ public class SearchControllerImpl implements SearchController {
 	@Override
 	@RequestMapping(value = "/initialize")
 	public Map<String, Object> initialize() {
-		Page page1 = new Page();
-		page1.setName("P1");
-		page1.setTags(Arrays.asList("Ford", "Car", "Review"));
-
-		Page page2 = new Page();
-		page2.setName("P2");
-		page2.setTags(Arrays.asList("Review", "Car"));
-
-		Page page3 = new Page();
-		page3.setName("P3");
-		page3.setTags(Arrays.asList("Review", "Ford"));
-
-		Page page4 = new Page();
-		page4.setName("P4");
-		page4.setTags(Arrays.asList("Toyota", "Car"));
-
-		Page page5 = new Page();
-		page5.setName("P5");
-		page5.setTags(Arrays.asList("Honda", "Car"));
-
-		Page page6 = new Page();
-		page6.setName("P6");
-		page6.setTags(Arrays.asList("Car"));
-
-		Page page7 = new Page();
-		page7.setName("P7");
-		page7.setTags(Arrays.asList("Car", "Ford"));
-
-		String[][] queries = { { "Ford" }, { "Car" }, { "Review" }, { "Ford", "Review" }, { "Ford", "Car" }, { "cooking", "French" } };
-		List<List<String>> queriesList = new ArrayList<>();
-		for (String[] query : queries) {
-			queriesList.add(Arrays.asList(query));
-		}
-		List<Page> pages = Arrays.asList(page1, page2, page3, page4, page5, page6);
-		List<Page> savedPages = this.searchService.save(pages);
+		List<Page> savedPages = this.searchService.save(stubData());
 		Map<String, Object> result = new LinkedHashMap<>();
 		result.put("initialize", "ok");
 		result.put("pages", savedPages);
