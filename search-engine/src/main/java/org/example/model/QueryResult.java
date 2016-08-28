@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 @Entity
@@ -12,7 +13,7 @@ public class QueryResult {
 	@Id
 	private String query;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> pageNames;
 
 	public String getQuery() {

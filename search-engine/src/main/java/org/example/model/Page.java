@@ -10,7 +10,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 @Entity
+@Indexed
 public class Page {
 
 	@Id
@@ -26,6 +31,8 @@ public class Page {
 	private Stats stats;
 
 	@ElementCollection
+	@Field
+	@IndexedEmbedded
 	private List<String> tags;
 
 	@OneToMany

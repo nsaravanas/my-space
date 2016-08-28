@@ -10,6 +10,7 @@ import org.example.model.Page;
 import org.example.model.QueryResult;
 import org.example.model.search.Search;
 import org.example.repository.PageRepository;
+import org.example.repository.PageSearchRepository;
 import org.example.repository.QueryResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -29,6 +30,9 @@ public class SearchService {
 
 	@Autowired
 	private QueryResultRepository resultRepository;
+
+	@Autowired
+	private PageSearchRepository pageSearchRepository;
 
 	@Transactional
 	public List<Page> search(Search search) {
@@ -58,6 +62,8 @@ public class SearchService {
 		// Query all pages
 		List<Page> persistentPages = pageRepository.findDistinctPageByTagsIn(queryList);
 		List<Page> indexedPages = searchEngine.indexing(persistentPages, queryList, queryString);
+
+		List<Page> luceneSearch = pageSearchRepository.findPagesByTags(queryString);
 
 		// Persist to DB
 		QueryResult result = new QueryResult();
