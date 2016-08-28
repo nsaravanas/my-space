@@ -59,11 +59,9 @@ public class SearchService {
 			}
 		}
 
-		// Query all pages
-		List<Page> persistentPages = pageRepository.findDistinctPageByTagsIn(queryList);
+		// Lucene search
+		List<Page> persistentPages = pageSearchRepository.findPagesByTags(queryString);
 		List<Page> indexedPages = searchEngine.indexing(persistentPages, queryList, queryString);
-
-		List<Page> luceneSearch = pageSearchRepository.findPagesByTags(queryString);
 
 		// Persist to DB
 		QueryResult result = new QueryResult();
