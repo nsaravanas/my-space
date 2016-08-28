@@ -37,16 +37,25 @@ public class PageSearchRepository {
 		fullTextEntityManager.createIndexer().startAndWait();
 	}
 
+	public boolean flushAllIndices() {
+		boolean result = true;
+		try {
+			fullTextEntityManager.purgeAll(Page.class);
+			fullTextEntityManager.createIndexer().startAndWait();
+		} catch (InterruptedException e) {
+			result = false;
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Transactional(TxType.REQUIRES_NEW)
 	public List<Page> findPagesByTags(String queryString) {
-		// entityManager.getTransaction().begin();
 		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Page.class).get();
 		Query luceneQuery = queryBuilder.keyword().onFields("tags").matching(queryString.replaceAll("_", " ")).createQuery();
 		javax.persistence.Query jpaQuery = fullTextEntityManager.createFullTextQuery(luceneQuery, Page.class);
-		@SuppressWarnings("unchecked")
-		List<Page> result = jpaQuery.setMaxResults(maxResult).getResultList();
-		// entityManager.getTransaction().commit();
-		return result;
+		return (List<Page>) jpaQuery.setMaxResults(maxResult).getResultList();
 	}
 
 	@PreDestroy
