@@ -8,8 +8,6 @@ import javax.transaction.Transactional;
 
 import org.example.model.Page;
 import org.example.model.QueryResult;
-import org.example.model.delete.DeleteResponse;
-import org.example.model.save.SaveResponse;
 import org.example.model.search.Search;
 import org.example.repository.PageRepository;
 import org.example.repository.QueryResultRepository;
@@ -70,19 +68,16 @@ public class SearchService {
 		return indexedPages;
 	}
 
-	public SaveResponse save(List<Page> pages) {
+	public List<Page> save(List<Page> pages) {
 		for (Page page : pages) {
 			page.setTags(page.getTags().stream().map(String::toLowerCase).collect(Collectors.toList()));
 		}
-		this.pageRepository.save(pages);
-		// TODO
-		return null;
+		return this.pageRepository.save(pages);
 	}
 
-	public DeleteResponse delete(List<Page> pages) {
+	public boolean delete(List<Page> pages) {
 		this.pageRepository.delete(pages);
-		// TODO
-		return null;
+		return true;
 	}
 
 	@Scheduled(fixedRate = 10 * 60 * 1000) // reIndex every 10 minutes

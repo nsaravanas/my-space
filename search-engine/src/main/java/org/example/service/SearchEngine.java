@@ -1,11 +1,12 @@
 package org.example.service;
 
+import static java.util.stream.Collectors.joining;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.example.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,6 @@ public class SearchEngine {
 	}
 
 	public static String getQueryString(List<String> queryList) {
-		return queryList.stream().collect(Collectors.joining("_")).toLowerCase();
+		return queryList.stream().collect(joining("_")).toLowerCase();
 	}
 }
