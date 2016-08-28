@@ -52,6 +52,14 @@ public class SearchController {
 		return result;
 	}
 
+	@RequestMapping(value = "/clear", method = RequestMethod.GET)
+	public Map<String, Boolean> clear() {
+		// TODO
+		Map<String, Boolean> result = new HashMap<>();
+		result.put("delete_success", false);
+		return result;
+	}
+
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public List<Page> selectAll() {
 		return this.searchService.getAll();

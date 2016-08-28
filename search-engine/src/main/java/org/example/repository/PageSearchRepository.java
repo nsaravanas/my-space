@@ -31,9 +31,10 @@ public class PageSearchRepository {
 	private EntityManager entityManager;
 
 	@PostConstruct
-	public void initalize() {
+	public void initalize() throws InterruptedException {
 		entityManager = factory.createEntityManager();
 		fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+		fullTextEntityManager.createIndexer().startAndWait();
 	}
 
 	@Transactional(TxType.REQUIRES_NEW)
