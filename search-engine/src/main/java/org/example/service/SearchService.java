@@ -14,6 +14,7 @@ import org.example.model.search.Search;
 import org.example.repository.PageRepository;
 import org.example.repository.QueryResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,9 @@ public class SearchService {
 
 	@Autowired
 	private SearchEngineOptimization engineOptimization;
+
+	@Autowired
+	private SearchEngine searchEngine;
 
 	@Autowired
 	private PageRepository pageRepository;
@@ -32,7 +36,7 @@ public class SearchService {
 	public List<Page> search(Search search) {
 
 		List<String> queryList = Arrays.asList(search.getTags()).stream().map(String::toLowerCase).collect(Collectors.toList());
-		String queryString = SearchEngineOptimization.getQueryString(queryList);
+		String queryString = SearchEngine.getQueryString(queryList);
 
 		// From cache
 		if (search.isCache()) {
@@ -55,7 +59,7 @@ public class SearchService {
 
 		// Query all pages
 		List<Page> persistentPages = pageRepository.findDistinctPageByTagsIn(queryList);
-		List<Page> indexedPages = engineOptimization.indexing(persistentPages, queryList, queryString);
+		List<Page> indexedPages = searchEngine.indexing(persistentPages, queryList, queryString);
 
 		// Persist to DB
 		QueryResult result = new QueryResult();
@@ -79,6 +83,16 @@ public class SearchService {
 		this.pageRepository.delete(pages);
 		// TODO
 		return null;
+	}
+
+	@Scheduled(fixedRate = 10 * 60 * 1000) // reIndex every 10 minutes
+	public void reIndex() {
+		List<QueryResult> queryResults = this.resultRepository.findAll();
+		for (QueryResult queryResult : queryResults) {
+			List<String> tags = Arrays.stream(queryResult.getQuery().split("_")).collect(Collectors.toList());
+			List<Page> pages = this.pageRepository.findAll(queryResult.getPageNames());
+			this.searchEngine.indexing(pages, tags, queryResult.getQuery());
+		}
 	}
 
 }

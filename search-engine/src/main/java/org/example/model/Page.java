@@ -2,10 +2,12 @@ package org.example.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -16,6 +18,12 @@ public class Page {
 
 	@Transient
 	private Integer weight;
+
+	@Column
+	private String url;
+
+	@OneToOne
+	private Stats stats;
 
 	@ElementCollection
 	private List<String> tags;
@@ -53,6 +61,22 @@ public class Page {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
