@@ -23,6 +23,7 @@ public interface SearchController {
 	Map<String, Object> initialize();
 
 	default List<Page> stubData() {
+
 		Page page1 = new Page();
 		page1.setName("P1");
 		page1.setTags(Arrays.asList("Ford", "Car", "Review"));

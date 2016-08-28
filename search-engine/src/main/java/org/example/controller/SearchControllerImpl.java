@@ -66,7 +66,7 @@ public class SearchControllerImpl implements SearchController {
 	}
 
 	@Override
-	@RequestMapping(value = "/initialize")
+	@RequestMapping(value = "/initialize", method = RequestMethod.GET)
 	public Map<String, Object> initialize() {
 		List<Page> savedPages = this.searchService.save(stubData());
 		Map<String, Object> result = new LinkedHashMap<>();

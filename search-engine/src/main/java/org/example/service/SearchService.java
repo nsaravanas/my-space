@@ -20,4 +20,6 @@ public interface SearchService {
 
 	Map<String, Boolean> clear();
 
+	void updatePageStats(List<Page> pages);
+
 }

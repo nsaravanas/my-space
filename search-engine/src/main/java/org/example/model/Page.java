@@ -2,6 +2,7 @@ package org.example.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Page {
 	@Column
 	private String url;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Stats stats;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -38,6 +39,10 @@ public class Page {
 
 	@OneToMany
 	private List<Page> pages;
+
+	public Page() {
+		stats = new Stats();
+	}
 
 	public List<Page> getPages() {
 		return pages;

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -48,6 +49,7 @@ public class SearchServiceImpl implements SearchService {
 		if (search.isCache()) {
 			List<Page> cacheResult = engineOptimization.getCache().get(queryString);
 			if (cacheResult != null && !cacheResult.isEmpty()) {
+				updatePageStats(cacheResult);
 				return cacheResult;
 			}
 		}
@@ -58,6 +60,7 @@ public class SearchServiceImpl implements SearchService {
 			if (queryResult != null) {
 				List<Page> queryPages = this.pageRepository.findAll(queryResult.getPageNames());
 				if (queryPages != null && !queryPages.isEmpty()) {
+					updatePageStats(queryPages);
 					return queryPages;
 				}
 			}
@@ -72,7 +75,7 @@ public class SearchServiceImpl implements SearchService {
 		result.setQuery(queryString);
 		result.setPageNames(indexedPages.stream().map(Page::getName).collect(toList()));
 		resultRepository.save(result);
-
+		updatePageStats(indexedPages);
 		return indexedPages;
 	}
 
@@ -115,6 +118,24 @@ public class SearchServiceImpl implements SearchService {
 		result.put("page_indices", true);
 		result.put("lucene_indices", this.pageSearchRepository.flushAllIndices());
 		return result;
+	}
+
+	@Transactional
+	@Override
+	public void updatePageStats(List<Page> pages) {
+		Thread t = new Thread(() -> {
+			try {
+				TimeUnit.MILLISECONDS.sleep(200);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			List<Page> updated = pages.stream().peek(p -> p.getStats().setLastVisitToNow()).peek(p -> p.getStats().incrementTotalVisit())
+					.collect(toList());
+			this.pageRepository.save(updated);
+		});
+		t.setPriority(Thread.MIN_PRIORITY);
+		t.setDaemon(true);
+		t.start();
 	}
 
 }

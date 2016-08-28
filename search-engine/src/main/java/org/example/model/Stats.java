@@ -20,7 +20,7 @@ public class Stats {
 	private LocalDateTime lastVisit;
 
 	@Column
-	private Long totalVisit;
+	private long totalVisit;
 
 	@ElementCollection
 	private List<String> missingTags;
@@ -37,8 +37,12 @@ public class Stats {
 		return lastVisit;
 	}
 
-	public Long getTotalVisit() {
+	public long getTotalVisit() {
 		return totalVisit;
+	}
+
+	public void incrementTotalVisit() {
+		this.totalVisit = getTotalVisit() + 1;
 	}
 
 	public Long getId() {
@@ -49,7 +53,11 @@ public class Stats {
 		this.lastVisit = lastVisit;
 	}
 
-	public void setTotalVisit(Long totalVisit) {
+	public void setLastVisitToNow() {
+		this.lastVisit = LocalDateTime.now();
+	}
+
+	public void setTotalVisit(long totalVisit) {
 		this.totalVisit = totalVisit;
 	}
 
