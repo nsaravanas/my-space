@@ -31,20 +31,112 @@ REST Endpoints
 End point usage
 ---------------
 
-##1.Save
+##1.Initialize
 
-<i>Request</i>
+Initlialize will save/index a set of predefined pages
+
+###<i>Request</i>
 
 ```sh
-cd dillinger
-npm install -d
-node app
+GET /initialize
 ```
 
-<i>Response</i>
+###<i>Response</i>
 
 ```sh
-cd dillinger
-npm install -d
-node app
+{
+  "initialize": "ok",
+  "pages": [
+    {
+      "name": "P1",
+      "weight": null,
+      "url": "www.p1.com",
+      "stats": {
+        "id": 1,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "ford",
+        "car",
+        "review"
+      ],
+      "subPages": null
+    },
+    {
+      "name": "P2",
+      "weight": null,
+      "url": "www.p2.com",
+      "stats": {
+        "id": 2,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "review",
+        "car"
+      ],
+      "subPages": null
+    },
+    {
+      "name": "P3",
+      "weight": null,
+      "url": "www.p3.com",
+      "stats": {
+        "id": 3,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "review",
+        "ford"
+      ],
+      "subPages": null
+    },
+    {
+      "name": "P4",
+      "weight": null,
+      "url": "www.p4.com",
+      "stats": {
+        "id": 4,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "toyota",
+        "car"
+      ],
+      "subPages": null
+    },
+    {
+      "name": "P5",
+      "weight": null,
+      "url": "www.p5.com",
+      "stats": {
+        "id": 5,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "honda",
+        "car"
+      ],
+      "subPages": null
+    },
+    {
+      "name": "P6",
+      "weight": null,
+      "url": "www.p6.com",
+      "stats": {
+        "id": 6,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "car"
+      ],
+      "subPages": null
+    }
+  ]
+}
 ```
