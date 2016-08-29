@@ -140,3 +140,343 @@ GET /initialize
   ]
 }
 ```
+
+
+##2.Get All
+
+getall will return all saved pages and additional information associated with each page
+
+###<i>Request</i>
+
+```sh
+GET /getall
+```
+
+###<i>Response</i>
+
+```sh
+[
+  {
+    "name": "P1",
+    "weight": null,
+    "url": "www.p1.com",
+    "stats": {
+      "id": 1,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "ford",
+      "car",
+      "review"
+    ],
+    "subPages": []
+  },
+  {
+    "name": "P2",
+    "weight": null,
+    "url": "www.p2.com",
+    "stats": {
+      "id": 2,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "review",
+      "car"
+    ],
+    "subPages": []
+  },
+  {
+    "name": "P3",
+    "weight": null,
+    "url": "www.p3.com",
+    "stats": {
+      "id": 3,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "review",
+      "ford"
+    ],
+    "subPages": []
+  },
+  {
+    "name": "P4",
+    "weight": null,
+    "url": "www.p4.com",
+    "stats": {
+      "id": 4,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "toyota",
+      "car"
+    ],
+    "subPages": []
+  },
+  {
+    "name": "P5",
+    "weight": null,
+    "url": "www.p5.com",
+    "stats": {
+      "id": 5,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "honda",
+      "car"
+    ],
+    "subPages": []
+  },
+  {
+    "name": "P6",
+    "weight": null,
+    "url": "www.p6.com",
+    "stats": {
+      "id": 6,
+      "lastVisit": null,
+      "totalVisit": 0
+    },
+    "tags": [
+      "car"
+    ],
+    "subPages": []
+  }
+]
+```
+
+##3.Save
+
+save to save a page
+
+###<i>Request</i>
+
+```sh
+POST /save
+Content-Type: application/json
+[
+    {
+    "name": "P7",
+    "url": "www.p7.com",
+    "tags": [
+      "ford",
+      "car",
+      "review"
+    ],
+    "subPages": []
+  }
+]
+```
+
+###<i>Response</i>
+
+```sh
+{
+  "saved_pages": [
+    "P7"
+  ]
+}
+```
+
+##4.Search
+
+search is to search a page with tags, there are two variations in search, by default it will return from in-memory/historic search/lucene cache, this can be overridden by passing cache and index as false
+
+###<i>Request</i>
+
+Cache
+
+```sh
+POST /search
+Content-Type: application/json
+{
+    "search" : {
+        "tags":["car"]
+    }
+}
+```
+
+No-cache
+
+```sh
+POST /search
+Content-Type: application/json
+{
+    "search" : {
+        "tags":["car"],
+        "cache":false,
+        "index":false
+    }
+}
+```
+
+###<i>Response</i>
+
+```sh
+{
+  "timeTaken_in_mills": 289,
+  "pages": [
+    {
+      "name": "P6",
+      "weight": 64,
+      "url": "www.p6.com",
+      "stats": {
+        "id": 6,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "car"
+      ],
+      "subPages": []
+    },
+    {
+      "name": "P2",
+      "weight": 56,
+      "url": "www.p2.com",
+      "stats": {
+        "id": 2,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "review",
+        "car"
+      ],
+      "subPages": []
+    },
+    {
+      "name": "P4",
+      "weight": 56,
+      "url": "www.p4.com",
+      "stats": {
+        "id": 4,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "toyota",
+        "car"
+      ],
+      "subPages": []
+    },
+    {
+      "name": "P5",
+      "weight": 56,
+      "url": "www.p5.com",
+      "stats": {
+        "id": 5,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "honda",
+        "car"
+      ],
+      "subPages": []
+    },
+    {
+      "name": "P1",
+      "weight": 56,
+      "url": "www.p1.com",
+      "stats": {
+        "id": 1,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "ford",
+        "car",
+        "review"
+      ],
+      "subPages": []
+    },
+    {
+      "name": "P7",
+      "weight": 56,
+      "url": "www.p7.com",
+      "stats": {
+        "id": 1,
+        "lastVisit": null,
+        "totalVisit": 0
+      },
+      "tags": [
+        "ford",
+        "car",
+        "review"
+      ],
+      "subPages": []
+    }
+  ]
+}
+```
+
+##5.Delete
+
+delete is to delete a page and all its associated sub-pages from table
+
+###<i>Request</i>
+
+```sh
+POST /save
+Content-Type: application/json
+[
+    {
+    "name": "P7",
+    "url": "www.p7.com",
+    "tags": [
+      "ford",
+      "car",
+      "review"
+    ],
+    "subPages": []
+  }
+]
+```
+
+###<i>Response</i>
+
+```sh
+{
+  "saved_pages": [
+    "P7"
+  ]
+}
+```
+
+##6.Save
+
+save to save a page
+
+###<i>Request</i>
+
+```sh
+POST /save
+Content-Type: application/json
+[
+    {
+    "name": "P7",
+    "url": "www.p7.com",
+    "tags": [
+      "ford",
+      "car",
+      "review"
+    ],
+    "subPages": []
+  }
+]
+```
+
+###<i>Response</i>
+
+```sh
+{
+  "saved_pages": [
+    "P7"
+  ]
+}
+```
