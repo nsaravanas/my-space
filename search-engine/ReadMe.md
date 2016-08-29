@@ -1,11 +1,16 @@
 Search Engine
 -------------
-	
-This is a tiny search engine uses 3 leves of cache
+
+This is a tiny search engine uses 3 levels of cache
 	
  1. in memory
  2. historic seach
  3. lucene search	
+
+Build 
+-----
+
+[![Build Status](https://travis-ci.org/nsaravanas/my-space.svg?branch=master)](https://travis-ci.org/nsaravanas/my-space)
 
 Technologies
 ----
