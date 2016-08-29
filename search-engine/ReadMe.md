@@ -31,7 +31,7 @@ REST Endpoints
 End point usage
 ---------------
 
-##1.Initialize
+##1.INITIALIZE
 
 Initlialize will save/index a set of predefined pages
 
@@ -142,7 +142,7 @@ GET /initialize
 ```
 
 
-##2.Get All
+##2.GET ALL
 
 getall will return all saved pages and additional information associated with each page
 
@@ -249,7 +249,7 @@ GET /getall
 ]
 ```
 
-##3.Save
+##3.SAVE
 
 save to save a page
 
@@ -282,7 +282,7 @@ Content-Type: application/json
 }
 ```
 
-##4.Search
+##4.SEARCH
 
 search is to search a page with tags, there are two variations in search, by default it will return from in-memory/historic search/lucene cache, this can be overridden by passing cache and index as false
 
@@ -415,7 +415,7 @@ Content-Type: application/json
 }
 ```
 
-##5.Delete
+##5.DELETE
 
 delete is to delete a page and all its associated sub-pages from table
 
@@ -435,7 +435,7 @@ Content-Type: application/json
 }
 ```
 
-##6.Clear
+##6.CLEAR
 
 clear is to permanently clear the in-memory cache, historic searches from table and lucene indices
 
