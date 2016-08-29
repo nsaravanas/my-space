@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
@@ -23,7 +22,7 @@ public class Page {
 	@Id
 	private String name;
 
-	@Transient
+	@Column
 	private Integer weight;
 
 	@Column
@@ -38,18 +37,18 @@ public class Page {
 	private List<String> tags;
 
 	@OneToMany
-	private List<Page> pages;
+	private List<Page> subPages;
 
 	public Page() {
 		stats = new Stats();
 	}
 
-	public List<Page> getPages() {
-		return pages;
+	public List<Page> getSubPages() {
+		return subPages;
 	}
 
-	public void setPages(List<Page> pages) {
-		this.pages = pages;
+	public void setSubPages(List<Page> subPages) {
+		this.subPages = subPages;
 	}
 
 	public List<String> getTags() {

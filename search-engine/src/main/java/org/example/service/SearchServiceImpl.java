@@ -42,7 +42,7 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Page> search(Search search) {
 
-		List<String> queryList = Arrays.asList(search.getTags()).stream().map(String::toLowerCase).collect(toList());
+		List<String> queryList = search.getTags().stream().map(String::toLowerCase).collect(toList());
 		String queryString = SearchEngineImpl.getQueryString(queryList);
 
 		// From cache

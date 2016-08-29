@@ -1,18 +1,20 @@
 package org.example.model.search;
 
+import java.util.List;
+
 public class Search {
 
 	private boolean cache = true;
 
 	private boolean index = true;
 
-	private String[] tags;
+	private List<String> tags;
 
-	public String[] getTags() {
+	public List<String> getTags() {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
+	public void setTags(List<String> tags) {
 		this.tags = tags;
 	}
 

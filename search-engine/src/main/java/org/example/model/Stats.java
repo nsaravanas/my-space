@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Stats {
 
@@ -23,6 +25,7 @@ public class Stats {
 	private long totalVisit;
 
 	@ElementCollection
+	@JsonIgnore
 	private List<String> missingTags;
 
 	public List<String> getMissingTags() {
