@@ -10,4 +10,4 @@ deploy:
     secure: 0634493f-ab0c-4463-9f1d-b996f813f88b
   app: tiny-search-engine
   on:
-    repo: my-space/search-engine
+    repo: my-space
