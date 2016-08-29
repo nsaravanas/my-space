@@ -31,6 +31,20 @@ REST Endpoints
 End point usage
 ---------------
 
+##1.Save
 
+<i>Request</i>
 
+```sh
+cd dillinger
+npm install -d
+node app
+```
 
+<i>Response</i>
+
+```sh
+cd dillinger
+npm install -d
+node app
+```
