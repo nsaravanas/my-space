@@ -7,10 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.example.model.Error;
 import org.example.model.Page;
 import org.example.model.search.SearchGetRequest;
 import org.example.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,5 +75,15 @@ public class SearchControllerImpl implements SearchController {
 		result.put("initialize", "ok");
 		result.put("pages", savedPages);
 		return result;
+	}
+
+	@ExceptionHandler(Throwable.class)
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public Error exceptionHandler(Exception ex) {
+		Error error = new Error();
+		error.setMessage("Error occured");
+		error.setExceptionMessage(ex.getMessage());
+		error.setAction("Check logs");
+		return error;
 	}
 }
