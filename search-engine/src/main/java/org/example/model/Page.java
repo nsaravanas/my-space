@@ -36,7 +36,7 @@ public class Page {
 	@IndexedEmbedded
 	private List<String> tags;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = false)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false)
 	private List<Page> subPages;
 
 	public Page() {
