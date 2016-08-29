@@ -20,12 +20,12 @@ Technologies
 
 REST Endpoints
 --------------
- 1. search
- 2. save
- 3. delete
- 4. clear
- 5. getall
- 6. initialize
+ 1. initialize
+ 2. getall
+ 3. save
+ 4. search
+ 5. delete
+ 6. clear
  
  
 End point usage
@@ -422,61 +422,35 @@ delete is to delete a page and all its associated sub-pages from table
 ###<i>Request</i>
 
 ```sh
-POST /save
+DELETE /delete
 Content-Type: application/json
-[
-    {
-    "name": "P7",
-    "url": "www.p7.com",
-    "tags": [
-      "ford",
-      "car",
-      "review"
-    ],
-    "subPages": []
-  }
-]
+["P1","P2"]
 ```
 
 ###<i>Response</i>
 
 ```sh
 {
-  "saved_pages": [
-    "P7"
-  ]
+  "delete_success": true
 }
 ```
 
-##6.Save
+##6.Clear
 
-save to save a page
+clear is to permanently clear the in-memory cache, historic searches from table and lucene indices
 
 ###<i>Request</i>
 
 ```sh
-POST /save
-Content-Type: application/json
-[
-    {
-    "name": "P7",
-    "url": "www.p7.com",
-    "tags": [
-      "ford",
-      "car",
-      "review"
-    ],
-    "subPages": []
-  }
-]
+GET /clear
 ```
 
 ###<i>Response</i>
 
 ```sh
 {
-  "saved_pages": [
-    "P7"
-  ]
+  "in_memory_cache": true,
+  "page_indices": true,
+  "lucene_indices": true
 }
 ```
