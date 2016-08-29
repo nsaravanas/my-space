@@ -60,7 +60,7 @@ public class SearchControllerImpl implements SearchController {
 	}
 
 	@Override
-	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
+	@RequestMapping(value = "/getall", method = RequestMethod.GET)
 	public List<Page> selectAll() {
 		return this.searchService.getAll();
 	}
