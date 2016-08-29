@@ -1,7 +1,7 @@
 Search Engine
 -------------
 
-This is a tiny search engine uses 3 leves of cache
+This is a tiny search engine uses 3 levels of cache
 	
  1. in memory
  2. historic seach
