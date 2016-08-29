@@ -2,6 +2,7 @@ package org.example.service;
 
 import static java.util.Arrays.asList;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.example.model.Page;
@@ -17,6 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class SearchEngineTest {
+
+	@Value("${total.result.pages}")
+	private int results;
 
 	@Value("${max.weight}")
 	private int maxWeight;
@@ -65,7 +69,7 @@ public class SearchEngineTest {
 			String[] actual = this.searchEngine.indexing(pages, queries[i]).stream().map(Page::getName).toArray(String[]::new);
 			String[] expected = expecteds[i];
 			Assert.assertNotNull(actual);
-			Assert.assertArrayEquals(expected, actual);
+			Assert.assertArrayEquals(Arrays.stream(expected).limit(results).toArray(), actual);
 		}
 	}
 

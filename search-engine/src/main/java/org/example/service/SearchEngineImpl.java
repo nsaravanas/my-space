@@ -1,11 +1,12 @@
 package org.example.service;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,9 @@ public class SearchEngineImpl implements SearchEngine {
 
 	@Value("${max.weight}")
 	private int maxWeight;
+
+	@Value("${total.result.pages}")
+	private int results;
 
 	@Autowired
 	private SearchEngineOptimization engineOptimization;
@@ -57,9 +61,9 @@ public class SearchEngineImpl implements SearchEngine {
 			if (page.getWeight() != 0)
 				matchedPages.add(page);
 		}
-		matchedPages.sort(Comparator.comparingInt(Page::getWeight).reversed());
-		addToCache(queryString, matchedPages);
-		return matchedPages;
+		List<Page> topMatches = matchedPages.stream().sorted(comparingInt(Page::getWeight).reversed()).limit(results).collect(toList());
+		addToCache(queryString, topMatches);
+		return topMatches;
 	}
 
 	@Override
